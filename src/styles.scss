@@ -4,7 +4,7 @@ $yellow: #FFE900;
 $white: white;
 $off-white: #FAF9F6;
 $green: #009900;
-$background-color: darken($off-white, 3%);
+$background-color: darken($off-white, 10%);
 
 $large: 3rem;
 $med: 1.3rem;
@@ -14,6 +14,7 @@ $small-space: 0.5rem;
 $calling-code: "CallingCode";
 
 $excel-border: lighten(black, 70%);
+$lighter-lines: lighten($excel-border, 20%);
 $index-lines: 1px dotted lighten(blue, 30%);
 
 @mixin flex-column($gap: 0rem) {
@@ -46,12 +47,22 @@ $index-lines: 1px dotted lighten(blue, 30%);
     font-weight: 100 1000;
 }
 
+@font-face {
+    font-family: "Another_Danger";
+    src: local("Another_Danger"), url(./app/assets/fonts/Another_Danger.ttf) format('opentype');
+    font-weight: 100 1000;
+}
+
 .cats-font {
     font-family: "CATS";
 }
 
 .strike {
     text-decoration: line-through;
+}
+
+.danger-font {
+    font-family: 'Another_Danger';
 }
 
 html, body {
@@ -109,6 +120,9 @@ body {
             padding: 0;
             letter-spacing: 5px;
         }
+        em {
+            font-size: 0.8rem;
+        }
     }
     .toolbar {
         background-color: $green;
@@ -126,87 +140,69 @@ body {
             linear-gradient($excel-border 1px, transparent 1px);
         background-size: calc(100vw/3) calc(100vh/30);
 
-        .corp-card {
+        .body-layout {
             margin-top: $small-space;
-            grid-area: content;
+            display: flex;
+            flex-direction: column;
+            gap: $small-space
+        }
+
+        .corp-card {
             display: grid;
             grid-template-columns: 1fr;
             grid-template-rows: auto 1fr;
             border: 1px solid $excel-border;
             box-shadow: $excel-border 3px 3px;
             background-color: $off-white;
+            &:nth-child(odd) {
+                .card-title {
+                    transform: rotate(2deg);
+                    &:hover {
+                        transition: all .05s ease-in-out !important;
+                        transform: scale(1.1) rotate(-1deg) !important;
+                    }
+                    &:active {
+                        transform: scale(1) !important;
+                    }
+                }
+            }
             .card-title {
+                font-size: 1.2rem;
                 background-color: $black;
-                padding: $small-space;
-                color: white;
+                padding: $small-space 0;
+                color: $yellow;
                 place-self: center;
                 transform: rotate(-1deg);
             }
             .card-body {
-                &.bio {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    .info-row {
-                        border-bottom: 1px solid $excel-border;
-                        &:nth-child(-n +2) {
-                            border-top: 1px solid $excel-border;
-                        }
-                        &:nth-child(even) {
-                            padding-right: $small-space;
-                            justify-content: end;
-                        }
-                        &:nth-child(odd) {
-                            padding-left: $small-space;
-                            border-right: 1px solid $excel-border;
-                        }
-                    }
-
+                padding: $small-space;
+                background-image:
+                linear-gradient(to right, $lighter-lines 1px, transparent 1px),
+                linear-gradient($lighter-lines 1px, transparent 1px);
+                background-size: calc(100vw/3) calc(100vh/30);
+                .bio-layout {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-evenly;
+                }
+                .hp-undo-section {
+                    margin-top: $small-space;
+                    display: flex;
+                    justify-content: space-evenly;
                 }
                 .info-row {
+                    .clickable {
+                        background-color: $black;
+                        color: $off-white;
+                    }
                     display: flex;
                     flex-direction: row;
-                    gap: 1rem;
+                    gap: $small-space;
                 }
             }
         }
     }
 }
-
-// h1 {
-    // color: $black;
-    // font-size: $large;
-    // letter-spacing: $small-space;
-    // font-weight: bold;
-    // margin: 0;
-    // background-color: $black;
-    // color: $yellow;
-    // transform: rotate(1deg);
-    // text-align: center;
-    // cursor: pointer;
-    // user-select: none;
-    // &:hover {
-    //     transition: all .05s ease-in-out;
-    //     transform: scale(1.1);
-    //     background-color: $pink;
-    //     color: $black;
-    // }
-    // &:active {
-    //     transform: scale(1);
-    // }
-    // text-shadow: 
-    //     $yellow 5px 5px,
-    //     $pink -5px -5px;
-    // -webkit-text-stroke: $black;
-    // -webkit-text-stroke-width: 1px;
-// }
-
-// .label-look {
-//     background-color: $white;
-//     color: $black;
-//     padding: 0 $small-space;
-//     font-size: $med;
-//     margin: 0;
-// }
 
 //TABLET
 @media only screen and (min-width: 768px) {
@@ -215,34 +211,41 @@ body {
             h1 {
                 font-size: 4rem;
             }
+            em {
+                font-size: 1.5rem;
+            }
         }
         .corp-body {
             display: grid;
-            grid-template-columns: 1fr 65% 1fr;
+            grid-template-columns: 1fr;
             grid-auto-rows: min-content;
             grid-template-areas:
-                ". content .";
+                "content";
             background-size: calc(100vw/5) calc(100vh/30);
+            .body-layout {
+                grid-area: content;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: min-content;
+                .corp-card {
+                    .card-body {
+                        background-size: calc(100vw/6) calc(100vh/30);
+                    }
+                }
+                .bio-card {
+                    grid-area: 1 / span 2;
+                }
+            }
         }
     }
-
-    // .corp-layout {
-    //     header h1 {
-    //         font-size: 4rem;
-    //     }
-    //     .cards-layout {
-    //         display: grid;
-    //         grid-template-columns: repeat(2, 1fr);
-    //         .corp-card:nth-child(1) {
-    //             grid-area: 1 / span 2;
-    //         }
-    //     }
-    // }
 }
 
 @media only screen and (min-width: 1440px) {
-    // .corp-layout {
-    //     max-width: 65%;
-    //     margin: auto;
-    // }
+    .corp-layout {
+        .corp-body {
+            grid-template-columns: 1fr 65% 1fr;
+            grid-template-areas:
+                ".  content .";
+        }
+    }
 }
