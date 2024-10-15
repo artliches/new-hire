@@ -11,8 +11,6 @@ $med: 1.3rem;
 $standard: 1rem;
 $small-space: 0.5rem;
 
-$calling-code: "CallingCode";
-
 $excel-border: lighten(black, 70%);
 $lighter-lines: lighten($excel-border, 20%);
 $index-lines: 1px dotted lighten(blue, 30%);
@@ -82,7 +80,7 @@ body {
 .clickable {
     width: max-content;
     padding: 0 1rem;
-    font-family: "CallingCode";
+    font-family: "RobotoMono";
     cursor: pointer;
     user-select: none;
     &:hover {
@@ -127,8 +125,15 @@ body {
     .toolbar {
         background-color: $green;
         padding: 0 1rem;
+        display: flex;
         .clickable {
             background-color: $background-color;
+            &:not(:first-of-type) {
+                box-shadow: inset 2px 0px 3px $excel-border;
+                &:hover {
+                    box-shadow: unset;
+                }
+            }
         }
     }
     .corp-body {
