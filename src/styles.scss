@@ -15,6 +15,42 @@ $excel-border: lighten(black, 70%);
 $lighter-lines: lighten($excel-border, 20%);
 $index-lines: 1px dotted lighten(blue, 30%);
 
+:root {
+    --border-color: #009900;
+    --header-color: #FAF9F6;
+    --excel-sheet-color: #e8e3d5;
+    --shadow-color: #b3b3b3;
+    --toolbar-text-color: #010203;
+}
+
+.excel {
+    --border-color: #009900;
+    --header-color: #FAF9F6;
+    --excel-sheet-color: #e8e3d5;
+    --shadow-color: #b3b3b3;
+    --toolbar-text-color: #010203;
+}
+
+.mork {
+    --border-color: #FFE900;
+    --header-color: #010203;
+    --excel-sheet-color: var(--header-color);
+    --shadow-color: grey;
+    --toolbar-text-color: white;
+}
+
+.blackout {
+    --border-color: #010203;
+    --header-color: #FAF9F6;
+    --excel-sheet-color: var(--border-color);
+    --shadow-color: grey;
+    --toolbar-text-color: white;
+}
+
+::selection {
+    background: var(--border-color);
+}
+
 @mixin flex-column($gap: 0rem) {
     display: flex;
     flex-direction: column;
@@ -133,8 +169,8 @@ body {
 
     header {
         grid-area: header;
-        background-color: $green;
-        color: $off-white;
+        background-color: var(--border-color);
+        color: var(--header-color);
         padding: $small-space 0;
         text-align: center;
         display: grid;
@@ -160,13 +196,14 @@ body {
         }
     }
     .toolbar {
-        background-color: $green;
+        background-color: var(--border-color);
         padding: 0 1rem;
         display: flex;
         .clickable {
-            background-color: $background-color;
+            background-color: var(--excel-sheet-color);
+            color: var(--toolbar-text-color);
             &:not(:first-of-type) {
-                box-shadow: inset 2px 0px 3px $excel-border;
+                box-shadow: inset 2px 0px 3px var(--shadow-color);
                 &:hover {
                     box-shadow: unset;
                 }
@@ -174,9 +211,9 @@ body {
         }
     }
     .corp-body {
-        border: thick solid $green;
+        border: thick solid var(--border-color);
         border-top: none;
-        background-color: $background-color;
+        background-color: var(--excel-sheet-color);
         background-position: 0px 0px;
         background-image:
             linear-gradient(to right, $excel-border 1px, transparent 1px),
@@ -197,7 +234,7 @@ body {
             grid-template-columns: 1fr;
             grid-template-rows: auto 1fr;
             border: 1px solid $excel-border;
-            box-shadow: $excel-border 5px 5px;
+            box-shadow: var(--shadow-color) 5px 5px;
             background-color: $off-white;
             &:nth-child(odd) {
                 .card-title {

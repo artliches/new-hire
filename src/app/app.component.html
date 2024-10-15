@@ -1,4 +1,4 @@
-<span class="corp-layout">
+<span class="corp-layout" [ngClass]="currTheme">
   <header>
     <h1 class="cats-font">NEW_HIRE.XLS</h1>
     <em>a corporate <span class="strike">sacrafice</span> drone generator for CORP <span class="danger-font">BORG</span></em>
@@ -10,8 +10,8 @@
       <div class="clickable">
         <strong>P</strong>rint
       </div>
-      <div class="clickable">
-        <strong>S</strong>huffle Theme
+      <div (click)="shuffleTheme()" class="clickable">
+        <strong>S</strong>huffle Theme: {{currTheme | uppercase}}
       </div>
   </div>
   <section class="corp-body">
