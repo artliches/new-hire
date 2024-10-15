@@ -51,6 +51,30 @@ $index-lines: 1px dotted lighten(blue, 30%);
     font-weight: 100 1000;
 }
 
+@keyframes move-background {
+    from {
+        background-position: 0 0;
+    } to {
+        background-position: 50% 100%;
+    }
+}
+
+// @keyframes scroll-left-to-right {
+//     from {
+//         transform: translateX(-100%);
+//     } to {
+//         transform: translateX(0);
+//     }
+// }
+
+// @keyframes scroll-right-to-left {
+//     from {
+//         transform: translateX(0%);
+//     } to {
+//         transform: translateX(-100%);
+//     }
+// }
+
 .cats-font {
     font-family: "CATS";
 }
@@ -75,6 +99,7 @@ body {
     font-family: "Alegreya";
     color: $black;
     line-height: 1.4;
+    font-size: 16px;
 }
 
 .clickable {
@@ -112,13 +137,25 @@ body {
         color: $off-white;
         padding: $small-space 0;
         text-align: center;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "title"
+            "detail";
         h1 {
+            width: min-content;
+            place-self: center;
+            z-index: 2;
+            grid-area: title;
             font-size: 2rem;
             margin: 0;
             padding: 0;
             letter-spacing: 5px;
         }
         em {
+            z-index: 2;
+            grid-area: detail;
             font-size: 0.8rem;
         }
     }
@@ -140,16 +177,19 @@ body {
         border: thick solid $green;
         border-top: none;
         background-color: $background-color;
+        background-position: 0px 0px;
         background-image:
             linear-gradient(to right, $excel-border 1px, transparent 1px),
             linear-gradient($excel-border 1px, transparent 1px);
         background-size: calc(100vw/3) calc(100vh/30);
+        animation: move-background 60s infinite linear;
 
         .body-layout {
             margin-top: $small-space;
             display: flex;
             flex-direction: column;
-            gap: $small-space
+            gap: $standard;
+            padding: 0 $small-space $small-space $small-space;
         }
 
         .corp-card {
@@ -157,7 +197,7 @@ body {
             grid-template-columns: 1fr;
             grid-template-rows: auto 1fr;
             border: 1px solid $excel-border;
-            box-shadow: $excel-border 3px 3px;
+            box-shadow: $excel-border 5px 5px;
             background-color: $off-white;
             &:nth-child(odd) {
                 .card-title {
@@ -248,9 +288,21 @@ body {
 @media only screen and (min-width: 1440px) {
     .corp-layout {
         .corp-body {
+            animation: move-background 45s infinite linear;
             grid-template-columns: 1fr 65% 1fr;
             grid-template-areas:
                 ".  content .";
+            .body-layout {
+                padding: 0;
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .corp-layout {
+        .corp-body {
+            animation:unset;
         }
     }
 }
