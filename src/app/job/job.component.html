@@ -1,0 +1,30 @@
+<div class="corp-card">
+    <span (click)="rerollJob()" class="card-title clickable">
+      you are a {{job.name}}!
+    </span>
+    <span class="card-body">
+        <em [innerHTML]="job.descrip"></em>
+        <span class="skill-group">
+            <span (click)="rerollSkills(isHelpDesker)" class="clickable">{{job.skill_descrips[0]}}</span>
+            <ul>
+                <li>
+                    <div (click)="rerollFirstSkill(isHelpDesker)" [innerHTML]="firstSkillObj.descrip"></div>
+                </li>
+
+                @if (extraSkillObj.descrip) {
+                    <li>
+                        <div (click)="rerollExtraSkill()" [innerHTML]="extraSkillObj.descrip"></div>
+                    </li>
+                }
+            </ul>
+        </span>
+        <span class="skill-group">
+            <span (click)="rerollSecondSkill()" class="clickable">{{job.skill_descrips[1]}}</span>
+            <ul >
+                <li>
+                    <div (click)="rerollSecondSkill()" [innerHTML]="secondSkillObj.descrip"></div>
+                </li>
+            </ul>
+        </span>
+    </span>
+</div>

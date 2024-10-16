@@ -95,21 +95,11 @@ $index-lines: 1px dotted lighten(blue, 30%);
     }
 }
 
-// @keyframes scroll-left-to-right {
-//     from {
-//         transform: translateX(-100%);
-//     } to {
-//         transform: translateX(0);
-//     }
-// }
-
-// @keyframes scroll-right-to-left {
-//     from {
-//         transform: translateX(0%);
-//     } to {
-//         transform: translateX(-100%);
-//     }
-// }
+@keyframes blink {
+    to {
+        opacity: 0;
+    }
+}
 
 .cats-font {
     font-family: "CATS";
@@ -188,6 +178,10 @@ body {
             margin: 0;
             padding: 0;
             letter-spacing: 5px;
+            .blink {
+                border-right: 0.4rem solid var(--header-color);
+                animation: blink 1s infinite;
+            }
         }
         em {
             z-index: 2;
@@ -230,6 +224,7 @@ body {
         }
 
         .corp-card {
+            height: 100%;
             display: grid;
             grid-template-columns: 1fr;
             grid-template-rows: auto 1fr;
@@ -262,6 +257,13 @@ body {
                 linear-gradient(to right, $lighter-lines 1px, transparent 1px),
                 linear-gradient($lighter-lines 1px, transparent 1px);
                 background-size: calc(100vw/3) calc(100vh/30);
+
+                .clickable {
+                    background-color: black;
+                    color: $yellow;
+                    font-family: "Alegreya";
+                    padding: 1px 0;
+                }
                 .bio-layout {
                     display: flex;
                     flex-wrap: wrap;
@@ -310,11 +312,15 @@ body {
                 grid-template-columns: repeat(2, 1fr);
                 grid-auto-rows: min-content;
                 .corp-card {
+                    &:last-child {
+                        grid-area: 3 / span 2;
+                    }
                     .card-body {
                         background-size: calc(100vw/6) calc(100vh/30);
+
                     }
                 }
-                .bio-card {
+                .resume {
                     grid-area: 1 / span 2;
                 }
             }

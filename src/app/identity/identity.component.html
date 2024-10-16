@@ -1,0 +1,11 @@
+<div class="corp-card">
+    <span (click)="rerollAll()" class="card-title clickable">
+        welcome to the company {{nameObj.descrip | lowercase}}!
+    </span>
+    <span class="card-body">
+        <div>You are <span (click)="rerollName()" class="clickable">{{nameObj.descrip}}</span>.</div>
+        <div>You <span (click)="rerollPast()" class="clickable" [innerHTML]="pastObj.descrip"></span>, but do not worry - <strong>it will get much worse!</strong></div>
+        <div>You are here because <span (click)="rerollReason()" class="clickable" [innerHTML]="reasonObj.descrip"></span> and you want <span (click)="rerollYearning()" class="clickable" [innerHTML]="yearnObj.descrip"></span>. Not that it matters.</div>
+        <div>Your current issue is <span class="clickable">issue</span>. Are you feeling stressed over this? You most likely <span (click)="rerollStress()" class="clickable" [innerHTML]="stressObj.descrip">reaction</span>.</div>
+    </span>
+</div>
