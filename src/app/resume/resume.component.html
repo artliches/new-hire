@@ -24,7 +24,11 @@
                 @if (stat.value === 0) {
                   &#177;
                 }
-                {{stat.value}}
+                @if (stat.name === 'hp') {
+                  {{stat.value}} / {{stat.value}}
+                } @else {
+                  {{stat.value}}
+                }
               </span>
             </span>
           }
