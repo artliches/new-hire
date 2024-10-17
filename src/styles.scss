@@ -257,7 +257,12 @@ body {
                 linear-gradient(to right, $lighter-lines 1px, transparent 1px),
                 linear-gradient($lighter-lines 1px, transparent 1px);
                 background-size: calc(100vw/3) calc(100vh/30);
-
+                .skill-group {
+                    .non-clickable {
+                        background-color: black;
+                        color: $yellow;
+                    }
+                }
                 .clickable {
                     background-color: black;
                     color: $yellow;

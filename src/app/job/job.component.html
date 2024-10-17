@@ -4,27 +4,55 @@
     </span>
     <span class="card-body">
         <em [innerHTML]="job.descrip"></em>
+        @if (job.extra && job.extra.length > 0) {
+            <span class="skill-group extras">
+                @for (extra of job.extra; track $index) {
+                    <span [innerHTML]="extra"></span>
+                }
+            </span>
+        }
         <span class="skill-group">
-            <span (click)="rerollSkills(isHelpDesker)" class="clickable">{{job.skill_descrips[0]}}</span>
-            <ul>
-                <li>
-                    <div (click)="rerollFirstSkill(isHelpDesker)" [innerHTML]="firstSkillObj.descrip"></div>
-                </li>
-
-                @if (extraSkillObj.descrip) {
+            @if (job.first_skill.length === 1) {
+                <span [innerHTML]="job.skill_descrips[0]" class="non-clickable"></span>
+            } @else {
+                <span [innerHTML]="job.skill_descrips[0]" (click)="rerollSkills(isHelpDesker)" class="clickable"></span>
+            }
+            @if (isHelpDesker) {
+                <ul>
+                    <li>
+                        <div (click)="rerollFirstSkill(isHelpDesker)" [innerHTML]="firstSkillObj.descrip"></div>
+                    </li>
                     <li>
                         <div (click)="rerollExtraSkill()" [innerHTML]="extraSkillObj.descrip"></div>
                     </li>
+                </ul>
+            } @else {
+                @if (job.name === 'designer') {
+                    <div class="single-skill" [innerHTML]="firstSkillObj.descrip"></div>
+                } @else {
+                    <span class="single-skill" [innerHTML]="firstSkillObj.descrip"></span>
                 }
-            </ul>
+            }
+
         </span>
-        <span class="skill-group">
-            <span (click)="rerollSecondSkill()" class="clickable">{{job.skill_descrips[1]}}</span>
-            <ul >
-                <li>
-                    <div (click)="rerollSecondSkill()" [innerHTML]="secondSkillObj.descrip"></div>
-                </li>
-            </ul>
-        </span>
+        @if (job.second_skill.length > 0) {
+            <span class="skill-group">
+                @if (showAllSkills) {
+                    <span [innerHTML]="job.skill_descrips[1]" class="non-clickable"></span>
+                    <span class="skill-list">
+                        <ol>
+                            @for (skill of job.second_skill; track $index) {
+                                <li>
+                                    <span [innerHTML]="skill"></span>
+                                </li>
+                            }
+                        </ol>
+                    </span>
+                } @else {
+                    <span [innerHTML]="job.skill_descrips[1]" (click)="rerollSecondSkill()" class="clickable"></span>
+                    <div class="single-skill" [innerHTML]="secondSkillObj.descrip"></div>
+                }
+            </span>
+        }
     </span>
 </div>

@@ -16,6 +16,7 @@ export class JobComponent implements OnInit, OnChanges {
   @Output() getNewJob: EventEmitter<boolean> = new EventEmitter();;
   isHelpDesker: boolean = false;
   extraIgnore: number = -1;
+  showAllSkills: boolean = false;
   firstSkillObj = {
     descrip: '',
     prevValue: -1,
@@ -32,8 +33,8 @@ export class JobComponent implements OnInit, OnChanges {
   };
 
   ngOnInit(): void {
-    this.isHelpDesker = this.job.name === 'helpdesker';
-    this.rerollAllSkills();
+    // this.isHelpDesker = this.job.name === 'helpdesker';
+    // this.rerollAllSkills();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,11 +58,14 @@ export class JobComponent implements OnInit, OnChanges {
   }
 
   rerollAllSkills() {
+    this.showAllSkills = this.job.name === 'salesperson' || this.job.name === 'controller';
     this.rerollFirstSkill(this.isHelpDesker);
     if (this.isHelpDesker) {
       this.rerollExtraSkill();
     }
-    this.rerollSecondSkill();
+    if (!this.showAllSkills) {
+      this.rerollSecondSkill();
+    } 
   }
 
   rerollFirstSkill(isHelpdesker?: boolean) {
@@ -81,9 +85,15 @@ export class JobComponent implements OnInit, OnChanges {
   }
 
   getSkills(skillArray: Array<string>, infoObj: any, extraIgnore?: number) {
-    const randNum = this.getRandomNum(skillArray, infoObj, extraIgnore);
-    const chosenSkill = skillArray[randNum];
-
+    let randNum;
+    let chosenSkill;
+    if (skillArray.length > 1) {
+      randNum = this.getRandomNum(skillArray, infoObj, extraIgnore);
+      chosenSkill = skillArray[randNum];
+    } else {
+      randNum = -1;
+      chosenSkill = skillArray[0];
+    }
     return infoObj = {
       descrip: chosenSkill,
       prevValue: randNum

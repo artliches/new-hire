@@ -19,15 +19,14 @@
         <span class="hp-undo-section">
           @for (stat of statsArray; track stat.name) {
             <span class="info-row">
-              <strong (click)="stat.name === 'hp' ? rerollHP() : ''" class="clickable">{{stat.name | uppercase}}</strong>
+              <strong (click)="rerollStats(stat.name)" class="clickable">{{stat.name | uppercase}}</strong>
               <span>
-                @if (stat.value === 0) {
-                  &#177;
-                }
                 @if (stat.name === 'hp') {
                   {{stat.value}} / {{stat.value}}
-                } @else {
-                  {{stat.value}}
+                } @else if (stat.name === '$avings') {
+                  {{stat.value}} ¤
+                } @else if (stat.name === 'undos') {
+                  {{stat.value}} (d{{stat.dieSize}})
                 }
               </span>
             </span>

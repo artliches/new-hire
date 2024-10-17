@@ -27,6 +27,7 @@ export class AppComponent {
 
   jobObj = {
     name: '',
+    extra: [''],
     descrip: '',
     skill_descrips: [''],
     first_skill: [''],
@@ -45,6 +46,7 @@ export class AppComponent {
 
     this.jobObj = {
       name: chosenJob.name,
+      extra: chosenJob.extra,
       descrip: chosenJob.descrip,
       skill_descrips: chosenJob.skill_descrips,
       first_skill: chosenJob.first_skill,
