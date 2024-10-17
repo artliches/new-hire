@@ -1,44 +1,33 @@
 <div class="corp-card bio-card">
-    <span class="card-title clickable">
+    <span (click)="rerollResume()" class="card-title clickable">
       employee_resume
     </span>
     <span class="card-body bio">
         <span class="bio-layout">
-          <span class="info-row">
-            <strong class="clickable">SOFT SKILLS</strong>
-            <span>&#177; 0</span>
-          </span>
-          <span class="info-row">
-            <strong class="clickable">HARD SKILLS</strong>
-            <span>&#177; 0</span>
-          </span>
-          <span class="info-row">
-            <strong class="clickable">FLEXIBILITY</strong>
-            <span>&#177;0</span>
-          </span>
-          <span class="info-row">
-            <strong class="clickable">INTEGRITY</strong>
-            <span>&#177; 0</span>
-          </span>
-          <span class="info-row">
-            <strong class="clickable">KNOWLEDGE</strong>
-            <span>&#177; 0</span>
-          </span>
+          @for (trait of traitsArray; track trait.name) {
+            <span class="info-row">
+              <strong (click)="rerollTrait(trait.name)" class="clickable">{{trait.name | uppercase}}</strong>
+              <span>
+                @if (trait.value === 0) {
+                  &#177;
+                }
+                {{trait.value}}
+              </span>
+            </span>
+          }
         </span>
-
         <span class="hp-undo-section">
-          <span class="info-row">
-            <strong class="clickable">HP</strong>
-            <span>5/5</span>
-          </span>
-          <span class="info-row">
-            <strong class="clickable">UNDO</strong>
-            <span>2(D2)</span>
-          </span>
-          <span class="info-row">
-            <strong class="clickable">$AVINGS</strong>
-            <span>666 ¤</span>
-          </span>
+          @for (stat of statsArray; track stat.name) {
+            <span class="info-row">
+              <strong (click)="stat.name === 'hp' ? rerollHP() : ''" class="clickable">{{stat.name | uppercase}}</strong>
+              <span>
+                @if (stat.value === 0) {
+                  &#177;
+                }
+                {{stat.value}}
+              </span>
+            </span>
+          }
         </span>
       </span>
   </div>

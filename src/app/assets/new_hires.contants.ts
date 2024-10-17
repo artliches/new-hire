@@ -106,6 +106,32 @@ export const JOBS = [
             'Black flames explode around you, <strong>damaging yourself and every enemy in sight for d4 damage</strong>',
             'Attacker becomes overwhelmed by guilt looking at your miserable face, <strong>test their Motivation (lowered by 2)</strong>',
         ],
+        stats: [
+            {
+                name: 'savings',
+                mod: '2d6x10'
+            },
+            {
+                name: 'undo',
+                mod: 'd3'
+            },
+            {
+                name: 'hp',
+                mod: '2+1'
+            },
+            {
+                name: 'integrity',
+                mod: 1
+            },
+            {
+                name: 'flexibility',
+                mod: 1
+            },
+            {
+                name: 'soft skills',
+                mod: -2
+            },
+        ],
     },
     {
         name: 'salesperson',
@@ -130,7 +156,53 @@ export const JOBS = [
             '<strong>Understanding Pain Points.</strong> Analyze an enemy. Skip one turn. Next turn, you deal +d6 damage to the analyzed opponent.',
             '<strong>FOMO (Fear of Misplaced Omens).</strong> Harness the fear of your enemies by offering them a limited deal (e.g., run now or be brutally violated later). Test their Motivation this turn.'
         ],
-    }
+        stats: [
+            {
+                name: 'savings',
+                mod: '4d6x10'
+            },
+            {
+                name: 'undo',
+                mod: 'd2'
+            },
+            {
+                name: 'hp',
+                mod: '6'
+            },
+            {
+                name: 'hard skills',
+                mod: -2
+            },
+            {
+                name: 'soft skills',
+                mod: 2
+            },
+        ],
+    },
+    // {
+    //     name: 'engineer',
+    //     descrip: "They hired you to build and fix things they use to <strong>break the world</strong>. You can repair and construct many things, but a broken body and a crushed soul are beyond your expertise. However, you quickly realize that your tools and knowledge are not only suitable for construction, but also <strong>destruction</strong>.",
+    //     skill_descrips: [
+    //         'Your latest corporate project was:',
+    //         'One thing in your toolbox:'
+    //     ],
+    //     first_skill: [
+    //         'A portable, pocket-size server containing a spellcrafting AI',
+    //         'Invisible surveillance equipment for monitoring employees',
+    //         'A fully automatic rig for human sacrifice',
+    //         'An algorithm capable of predicting people\'s nightmares',
+    //         'Satellite directed to the Earth\'s core',
+    //         'Elaborate cog machinery that does nothing',
+    //     ],
+    //     second_skill: [
+    //         '<strong>Skeleton Screwdriver.</strong> Made from the bone of an old handyman, this tool not only can repair nearly anything (test Hard Skills or Knowledge DR14) but can be used as a weapon (d3 damage, 50% chance for bleed, 1 damage/d4 rounds)',
+    //         '<strong>Silver Cables.</strong> Faster than normal ones (-2DR for Knowledge test when used for anything computer related), also can be used to bind lesser demons',
+    //         '<strong>Talking Wrench.</strong> Seems to be very, very knowledgeable, but it’s trustworthy only half of the time, useful in repairs too',
+    //         '<strong>BerHam.</strong> d2 damage, a regular sized hammer that becomes heavier with the decline of the user’s health (+1DR to hit and +d2 damage with each HP lost during the battle, resets after the fight)',
+    //         '<strong>High Quality Junk.</strong> Test Knowledge and Hard Skills DR8. If both are successful, create two of the following: a weapon enhancement (additional d2 damage), a piece of armor (additional -d2 to the existing defense) or an automaton (2HP, 2 damage, -d2 steel); enough for one time use, can be salvaged from intricate and/or occult machinery',
+    //         '<strong>20.20 Fuel.</strong> Almost impossible to contain, will burn through most things but only for d20 seconds; when drunk, turns the drinker into a living bomb that will explode in d20 seconds and inflict d20 damage in a 20 meter radius',
+    //     ],
+    // }
 ];
 
 export const NAMES = [

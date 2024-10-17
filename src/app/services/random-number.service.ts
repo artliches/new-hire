@@ -19,4 +19,12 @@ export class RandomNumberService {
     }
       return numToReturn;
     }
+
+    rollMultipleDice(dieNum: number, dieSize: number): number {
+      let sum = 0;
+      for (let i = 0; i < dieNum; i++) {
+        sum += this.getRandomNumber(1, dieSize);
+      }
+      return sum;
+    }
 }

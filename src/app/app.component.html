@@ -4,7 +4,7 @@
       NEW_HIRE.XLS
       <span class="blink"></span>
     </h1>
-    <em>a corporate <span class="strike">sacrafice</span> drone generator for CORP <span class="danger-font">BORG</span></em>
+    <em>a corporat <span class="strike">sacrafice</span> drone generator for CORP <span class="danger-font">BORG</span></em>
   </header>
   <div class="toolbar">
       <div class="clickable">
@@ -19,7 +19,7 @@
   </div>
   <section class="corp-body">
     <div class="body-layout">
-      <app-resume class="resume"></app-resume>
+      <app-resume [job]="jobObj" class="resume"></app-resume>
       <app-identity [job]="jobObj"></app-identity>
       <app-job (getNewJob)="getJob()" [job]="jobObj"></app-job>
 

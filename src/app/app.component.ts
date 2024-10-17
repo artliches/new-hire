@@ -31,6 +31,7 @@ export class AppComponent {
     skill_descrips: [''],
     first_skill: [''],
     second_skill: [''],
+    stats: [{}],
     prevValue: -1,
   };
 
@@ -48,6 +49,7 @@ export class AppComponent {
       skill_descrips: chosenJob.skill_descrips,
       first_skill: chosenJob.first_skill,
       second_skill: chosenJob.second_skill,
+      stats: chosenJob?.stats,
       prevValue: randNum
     };
   }
