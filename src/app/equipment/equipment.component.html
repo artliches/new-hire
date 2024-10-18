@@ -5,17 +5,21 @@
     <span class="card-body">
         <ul>
             <li>
-                <div class="equip-layout">
-                    <span><span (click)="rerollWeapon()" class="clickable">{{weaponObj.name | titlecase}}</span>,</span> <span [innerHTML]="weaponObj.descrip"></span>
+                <div>
+                    <span (click)="rerollWeapon()" class="clickable">{{weaponObj.name | titlecase}}</span>
+                    @if (weaponObj.descrip) {
+                        ,
+                    }
+                     <span [innerHTML]="weaponObj.descrip"></span>
                 </div>
             </li>
             <li>
-                <div class="equip-layout">
+                <div>
                     <span><span (click)="rerollArmor()" class="clickable">{{armorObj.name | titlecase}}</span>,</span> <span [innerHTML]="armorObj.descrip"></span>
                 </div>
             </li>
             <li>
-                <div class="equip-layout">
+                <div>
                     <span><span (click)="rerollBags()" class="clickable">{{bagsObj.name | titlecase}}</span>
                     @if (bagsObj.descrip) {
                         ,
@@ -35,7 +39,7 @@
             @if (incantObj && incantObj[0].descrip) {
                 @for (incant of incantObj; track $index) {
                     <li>
-                        <div class="equip-layout">
+                        <div>
                             @if ($index === 0) {
                                 <span (click)="rerollSpecials()" class="clickable">{{incant.name}}</span>
                             } @else {

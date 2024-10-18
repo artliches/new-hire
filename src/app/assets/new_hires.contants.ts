@@ -502,51 +502,51 @@ export const SPECIALS = [
 export const INCANTATIONS = [
     {
         name: 'Larval Migraine.',
-        descrip: 'Create a maggot inside a human brain, dealing d6 damage and taking one of the senses.',
+        descrip: ' Create a maggot inside a human brain, dealing d6 damage and taking one of the senses.',
     },
     {
         name: 'Tongues.',
-        descrip: 'Understand demon language for a day but lose the ability to speak for a day.'
+        descrip: ' Understand demon language for a day but lose the ability to speak for a day.'
     },
     {
         name: 'Hourglass.',
-        descrip: 'Make d4 targets think the end of the world just started.'
+        descrip: ' Make d4 targets think the end of the world just started.'
     },
     {
         name: 'Caffine Descend.',
-        descrip: 'Make one human target eternally dependent on constant caffeine intake to survive. If deprived of coffee for longer than an hour it suffers excruciating pain, losing 1HP (if it goes to null, it dies).'
+        descrip: ' Make one human target eternally dependent on constant caffeine intake to survive. If deprived of coffee for longer than an hour it suffers excruciating pain, losing 1HP (if it goes to null, it dies).'
     },
     {
         name: 'Smart Casual.',
-        descrip: 'Change appearance and voice for d20 minutes.'
+        descrip: ' Change appearance and voice for d20 minutes.'
     },
     {
         name: 'Intern Affairs.',
-        descrip: 'Summon d4 faithful interns (no armor, d2 scratch, worthless).'
+        descrip: ' Summon d4 faithful interns (no armor, d2 scratch, worthless).'
     },
     {
         name: 'Doom Merger.',
-        descrip: 'Link d4 targets minds so anything that happens to one happens to all, including damage taken.'
+        descrip: ' Link d4 targets minds so anything that happens to one happens to all, including damage taken.'
     },
     {
         name: 'Cubicle Surprise.',
-        descrip: 'For 4 minutes enclose one target in a 2x2x2m cubicle filled with d6: 1-2 water 3-4 coffee 5-6 pineapple jelly. Swim to escape (test Flexibility DR12) or hold your breath (test Hard Skills DR12) until the incantation ends.'
+        descrip: ' For 4 minutes enclose one target in a 2x2x2m cubicle filled with d6: 1-2 water 3-4 coffee 5-6 pineapple jelly. Swim to escape (test Flexibility DR12) or hold your breath (test Hard Skills DR12) until the incantation ends.'
     },
     {
         name: 'Persona Non Grata.',
-        descrip: 'The target becomes invisible for d6 turns/minutes or until their heart rate exceeds 70 BPM.'
+        descrip: ' The target becomes invisible for d6 turns/minutes or until their heart rate exceeds 70 BPM.'
     },
     {
         name: 'Downgrade.',
-        descrip: 'Lowers target’s HP to d6and Motivation to d4.'
+        descrip: ' Lowers target’s HP to d6and Motivation to d4.'
     },
     {
         name: 'Brainstorm.',
-        descrip: 'Confuse d4 targets for 2 rounds. They will attack each other in a frenzy.'
+        descrip: ' Confuse d4 targets for 2 rounds. They will attack each other in a frenzy.'
     },
     {
         name: 'One Last Task.',
-        descrip: 'Bring back a human to life with 1HP and total, indivisible attention to one specific task. It will die after the task is done.'
+        descrip: ' Bring back a human to life with 1HP and total, indivisible attention to one specific task. It will die after the task is done.'
     },
 ];
 
