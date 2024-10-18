@@ -485,18 +485,18 @@ export const ESSENTIALS = [
 ];
 
 export const SPECIALS = [
-    // '<span class="clickable">A crystal</span> that glows red in the presence of a <strong>left-handed person</strong>',
-    // 'An invisible, annoying <span class="clickable">parrot</span>',
-    // '<span class="clickable">A toy plane</span> with a <strong>tiny portal</strong> inside',
-    // '<span class="clickable">A microwaved fish</span>',
-    // '<span class="clickable">A coupon for</span> d20 <span class="clickable">free coffees</span> at the local coffee shop',
+    '<span class="clickable">A crystal</span> that glows red in the presence of a <strong>left-handed person</strong>',
+    'An invisible, annoying <span class="clickable">parrot</span>',
+    '<span class="clickable">A toy plane</span> with a <strong>tiny portal</strong> inside',
+    '<span class="clickable">A microwaved fish</span>',
+    '<span class="clickable">A coupon for</span> d20 <span class="clickable">free coffees</span> at the local coffee shop',
     '<span class="clickable">Magic detecting glasses</span> (d3 uses/day, test <strong>Knowledge DR12</strong> to use)',
     'Random incantation',
     '<span class="clickable">A mug</span> always filled with stale water',
-    // 'An old <span class="clickable">boombox</span>',
-    // 'd66 day old <span class="clickable">sandwich</span>',
-    // '<span class="clickable">A note</span> with your name written in <strong>blood</strong>',
-    // '<span class="clickable">Necklace</span> worth <strong>100¤</strong>',
+    'An old <span class="clickable">boombox</span>',
+    'd66 day old <span class="clickable">sandwich</span>',
+    '<span class="clickable">A note</span> with your name written in <strong>blood</strong>',
+    '<span class="clickable">Necklace</span> worth <strong>100¤</strong>',
 ];
 
 export const INCANTATIONS = [
