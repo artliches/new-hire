@@ -22,7 +22,7 @@
       <app-resume [job]="jobObj" class="resume"></app-resume>
       <app-identity [job]="jobObj"></app-identity>
       <app-job (getNewJob)="getJob()" [job]="jobObj"></app-job>
-      <app-equipment class="equipment"></app-equipment>
+      <app-equipment [job]="jobObj" class="equipment"></app-equipment>
     </div>
   </section>
 </span>

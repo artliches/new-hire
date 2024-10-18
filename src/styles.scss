@@ -213,7 +213,7 @@ body {
             linear-gradient(to right, $excel-border 1px, transparent 1px),
             linear-gradient($excel-border 1px, transparent 1px);
         background-size: calc(100vw/3) calc(100vh/30);
-        animation: move-background 60s infinite linear;
+        // animation: move-background 60s infinite linear;
 
         .body-layout {
             margin-top: $small-space;
@@ -339,7 +339,7 @@ body {
 @media only screen and (min-width: 1440px) {
     .corp-layout {
         .corp-body {
-            animation: move-background 45s infinite linear;
+            // animation: move-background 45s infinite linear;
             grid-template-columns: 1fr 65% 1fr;
             grid-template-areas:
                 ".  content .";

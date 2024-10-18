@@ -1,10 +1,51 @@
 <div class="corp-card">
-    <span class="card-title clickable">
+    <span (click)="rerollAll()" class="card-title clickable">
       your welcome pack is here!
     </span>
     <span class="card-body">
-      Lorem ipsum odor amet, consectetuer adipiscing elit. Imperdiet imperdiet fermentum leo inceptos mus ornare. Dis suscipit suspendisse nulla ultricies eleifend nunc ex scelerisque dis. Libero erat mus luctus nascetur quisque dolor placerat. Habitasse torquent erat curabitur libero netus risus torquent. Feugiat venenatis curabitur rhoncus justo facilisi semper vulputate. Dapibus sociosqu finibus eu, inceptos enim tristique. Pulvinar cursus dolor nascetur eu pretium curabitur. Imperdiet varius penatibus suscipit curabitur nascetur feugiat tortor.
+        <ul>
+            <li>
+                <div class="equip-layout">
+                    <span><span (click)="rerollWeapon()" class="clickable">{{weaponObj.name | titlecase}}</span>,</span> <span [innerHTML]="weaponObj.descrip"></span>
+                </div>
+            </li>
+            <li>
+                <div class="equip-layout">
+                    <span><span (click)="rerollArmor()" class="clickable">{{armorObj.name | titlecase}}</span>,</span> <span [innerHTML]="armorObj.descrip"></span>
+                </div>
+            </li>
+            <li>
+                <div class="equip-layout">
+                    <span><span (click)="rerollBags()" class="clickable">{{bagsObj.name | titlecase}}</span>
+                    @if (bagsObj.descrip) {
+                        ,
+                    }
+                    </span> <span [innerHTML]="bagsObj.descrip"></span>
+                </div>
+            </li>
+            <li>
+                <span [innerHTML]="essentialsObj.descrip" (click)="rerollEssentials()"></span>
+            </li>
 
-      Senectus nascetur vehicula mollis sed viverra euismod magna senectus. Curabitur torquent sociosqu aliquam; sociosqu duis senectus semper iaculis. Curabitur molestie porta aliquet placerat risus condimentum. Platea finibus finibus mi mus imperdiet augue. Pellentesque adipiscing conubia magna imperdiet fringilla ultrices massa primis nulla? Dapibus porta hac iaculis aptent justo nullam. Platea ante mollis felis ligula pellentesque.
+            @if (specialObj.descrip) {
+                <li>
+                    <span [innerHTML]="specialObj.descrip" (click)="rerollSpecials()"></span>
+                </li>
+            }
+            @if (incantObj && incantObj[0].descrip) {
+                @for (incant of incantObj; track $index) {
+                    <li>
+                        <div class="equip-layout">
+                            @if ($index === 0) {
+                                <span (click)="rerollSpecials()" class="clickable">{{incant.name}}</span>
+                            } @else {
+                                <span (click)="rerollIncantations()" class="clickable">{{incant.name}}</span>
+                            }
+                            <span [innerHTML]="incant.descrip"></span>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
     </span>
 </div>

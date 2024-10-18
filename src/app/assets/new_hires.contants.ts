@@ -376,7 +376,179 @@ export const JOBS = [
     },
 ];
 
+export const OFFICE_TOOLS = [
+    {
+        name: 'stapler',
+        descrip: 'd3',
+    },
+    {
+        name: 'pen',
+        descrip: 'd3, At maximum damage, it punctures the target. Test Flexibility or Hard Skills DR12 to pull out and cause bleeding (<strong>1 damage/d4 rounds</strong>).',
+    },
+    {
+        name: 'mug',
+        descrip: 'd4, d3 splash of hot liquid (<strong>one use, can be refilled</strong>).',
+    },
+    {
+        name: 'keyboard',
+        descrip: 'd6, Breaks after <strong>d4 hits</strong>.',
+    },
+    {
+        name: 'scissors',
+        descrip: 'd4',
+    },
+    {
+        name: 'stapler',
+        descrip: 'd3',
+    },
+    {
+        name: 'briefcase',
+        descrip: 'd6, Find a random <strong>item</strong> or a random <strong>weapon</strong> inside.',
+    },
+    {
+        name: 'cable whip',
+        descrip: 'd6 + 1',
+    },
+    {
+        name: 'paper cutter blade',
+        descrip: 'd6, 50% chance to cause <strong>bleeding on hit</strong>.',
+    },
+];
 
+export const SUITS = [
+    {
+        name: 'just a shirt & jeans',
+        descrip: 'no damage reduction, -2DR for all Flexibility tests'
+    },
+    {
+        name: 'cheap suit',
+        descrip: '-d2 damage, +2DR for all Soft Skills tests'
+    },
+    {
+        name: 'linen suit',
+        descrip: '-d2 damage'
+    },
+    {
+        name: 'three piece suit',
+        descrip: '-d4 damage'
+    },
+    {
+        name: 'bulletproof suit',
+        descrip: '-d4 damage, 0 damage from gunshots to the core +2DR for all Flexibility tests'
+    },
+    {
+        name: 'executive suit',
+        descrip: '-d6 damage'
+    },
+];
+
+export const BAGS = [
+    {
+        name: 'Just Pockets',
+        descrip: ''
+    },
+    {
+        name: 'Fanny Pack',
+        descrip: '1 standard-sized item'
+    },
+    {
+        name: 'Handbag/Laptop bag',
+        descrip: '4 items'
+    },
+    {
+        name: 'Backpack',
+        descrip: '7 items'
+    },
+    {
+        name: 'Two-deck metal trolley',
+        descrip: '12 items'
+    },
+    {
+        name: 'Bag of Wonders',
+        descrip: 'holds ∞ items; roll flat d20, 12 or more, you get the item you wanted otherwise you pull something horrible)'
+    },
+];
+
+export const ESSENTIALS = [
+    '<span class="clickable">Set of cables</span>',
+    '<span class="clickable">Flashlight</span> with battery for <strong>d4+Hard Skills hrs</strong>',
+    'C4 explosive left by an ex-employee (<strong>d12 damage in 10m radius</strong>)',
+    '<span class="clickable">First aid kit</span>; d4 uses, stops bleeding, <strong>heals d6 HP</strong>',
+    'Disposable <strong class="clickable">electronic key-hacker</strong>; d3 uses (<strong>open electronic doors</strong>)',
+    'A <span class="clickable">USB drive</span> with d3 viruses (<strong>test Knowledge DR12 to hack</strong>)',
+    '<span class="clickable">Golden credit card</span> with <strong>d6x100¤</strong> on it',
+    'Set of d6 <span class="clickable">paper clips</span> (<strong>test Flexibility DR12 to open doors</strong>)',
+    '<span class="clickable">Very sharp pencil</span> (d8 damage, <strong>one use</strong>)',
+    '<span class="clickable">Power bank</span> with energy for <strong>d6 hours</strong>',
+    'Bottle of high % <span class="clickable">vodka</span>',
+    'Bag of <span class="clickable">coffee additives</span>',
+];
+
+export const SPECIALS = [
+    // '<span class="clickable">A crystal</span> that glows red in the presence of a <strong>left-handed person</strong>',
+    // 'An invisible, annoying <span class="clickable">parrot</span>',
+    // '<span class="clickable">A toy plane</span> with a <strong>tiny portal</strong> inside',
+    // '<span class="clickable">A microwaved fish</span>',
+    // '<span class="clickable">A coupon for</span> d20 <span class="clickable">free coffees</span> at the local coffee shop',
+    '<span class="clickable">Magic detecting glasses</span> (d3 uses/day, test <strong>Knowledge DR12</strong> to use)',
+    'Random incantation',
+    '<span class="clickable">A mug</span> always filled with stale water',
+    // 'An old <span class="clickable">boombox</span>',
+    // 'd66 day old <span class="clickable">sandwich</span>',
+    // '<span class="clickable">A note</span> with your name written in <strong>blood</strong>',
+    // '<span class="clickable">Necklace</span> worth <strong>100¤</strong>',
+];
+
+export const INCANTATIONS = [
+    {
+        name: 'Larval Migraine.',
+        descrip: 'Create a maggot inside a human brain, dealing d6 damage and taking one of the senses.',
+    },
+    {
+        name: 'Tongues.',
+        descrip: 'Understand demon language for a day but lose the ability to speak for a day.'
+    },
+    {
+        name: 'Hourglass.',
+        descrip: 'Make d4 targets think the end of the world just started.'
+    },
+    {
+        name: 'Caffine Descend.',
+        descrip: 'Make one human target eternally dependent on constant caffeine intake to survive. If deprived of coffee for longer than an hour it suffers excruciating pain, losing 1HP (if it goes to null, it dies).'
+    },
+    {
+        name: 'Smart Casual.',
+        descrip: 'Change appearance and voice for d20 minutes.'
+    },
+    {
+        name: 'Intern Affairs.',
+        descrip: 'Summon d4 faithful interns (no armor, d2 scratch, worthless).'
+    },
+    {
+        name: 'Doom Merger.',
+        descrip: 'Link d4 targets minds so anything that happens to one happens to all, including damage taken.'
+    },
+    {
+        name: 'Cubicle Surprise.',
+        descrip: 'For 4 minutes enclose one target in a 2x2x2m cubicle filled with d6: 1-2 water 3-4 coffee 5-6 pineapple jelly. Swim to escape (test Flexibility DR12) or hold your breath (test Hard Skills DR12) until the incantation ends.'
+    },
+    {
+        name: 'Persona Non Grata.',
+        descrip: 'The target becomes invisible for d6 turns/minutes or until their heart rate exceeds 70 BPM.'
+    },
+    {
+        name: 'Downgrade.',
+        descrip: 'Lowers target’s HP to d6and Motivation to d4.'
+    },
+    {
+        name: 'Brainstorm.',
+        descrip: 'Confuse d4 targets for 2 rounds. They will attack each other in a frenzy.'
+    },
+    {
+        name: 'One Last Task.',
+        descrip: 'Bring back a human to life with 1HP and total, indivisible attention to one specific task. It will die after the task is done.'
+    },
+];
 
 export const NAMES = [
     'Jonn',
