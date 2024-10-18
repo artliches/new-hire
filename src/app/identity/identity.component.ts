@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RandomNumberService } from '../services/random-number.service';
-import { NAMES, PAST, REASON, STRESS, YEARNING } from '../assets/new_hires.contants';
+import { ISSUES, NAMES, PAST, REASON, STRESS, YEARNING } from '../assets/new_hires.contants';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -31,6 +31,11 @@ export class IdentityComponent implements OnInit {
     prevValue: -1
   };
 
+  issueObj = {
+    descrip: '',
+    prevValue: -1
+  };
+
   reasonObj = {
     descrip: '',
     prevValue: -1
@@ -56,6 +61,7 @@ export class IdentityComponent implements OnInit {
     this.rerollYearning();
     this.rerollStress();
     this.rerollName();
+    this.rerollIssue();
   }
 
   rerollName() {
@@ -70,6 +76,14 @@ export class IdentityComponent implements OnInit {
     const randNum = this.getRandomNum(PAST, this.pastObj);
     this.pastObj.descrip = PAST[randNum];
     this.pastObj.prevValue = randNum;
+  }
+
+  rerollIssue() {
+    const randNum = this.getRandomNum(ISSUES, this.issueObj);
+    this.issueObj = {
+      descrip: ISSUES[randNum],
+      prevValue: randNum
+    };
   }
 
   rerollReason() {

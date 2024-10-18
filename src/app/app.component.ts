@@ -6,11 +6,12 @@ import { ResumeComponent } from './resume/resume.component';
 import { JOBS } from './assets/new_hires.contants';
 import { RandomNumberService } from './services/random-number.service';
 import { JobComponent } from "./job/job.component";
+import { EquipmentComponent } from "./equipment/equipment.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, IdentityComponent, ResumeComponent, JobComponent],
+  imports: [RouterOutlet, CommonModule, IdentityComponent, ResumeComponent, JobComponent, EquipmentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

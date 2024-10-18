@@ -14,7 +14,7 @@ export class JobComponent implements OnInit, OnChanges {
   ) {}
   @Input() job: any;
   @Output() getNewJob: EventEmitter<boolean> = new EventEmitter();;
-  isHelpDesker: boolean = false;
+  getExtraStartSkill: boolean = false;
   extraIgnore: number = -1;
   showAllSkills: boolean = false;
   firstSkillObj = {
@@ -42,13 +42,13 @@ export class JobComponent implements OnInit, OnChanges {
       descrip: '',
       prevValue: -1
     };
-    this.isHelpDesker = this.job.name === 'helpdesker';
+    this.getExtraStartSkill = this.job.name === 'helpdesker' || this.job.name === 'supplier';
     this.rerollAllSkills();
   }
 
-  rerollSkills(isHelpDesker: boolean) {
-    this.rerollFirstSkill(isHelpDesker);
-    if (isHelpDesker) {
+  rerollSkills(getExtraStartSkill: boolean) {
+    this.rerollFirstSkill(getExtraStartSkill);
+    if (getExtraStartSkill) {
       this.rerollExtraSkill();
     }
   }
@@ -59,8 +59,8 @@ export class JobComponent implements OnInit, OnChanges {
 
   rerollAllSkills() {
     this.showAllSkills = this.job.name === 'salesperson' || this.job.name === 'controller';
-    this.rerollFirstSkill(this.isHelpDesker);
-    if (this.isHelpDesker) {
+    this.rerollFirstSkill(this.getExtraStartSkill);
+    if (this.getExtraStartSkill) {
       this.rerollExtraSkill();
     }
     if (!this.showAllSkills) {
@@ -68,8 +68,8 @@ export class JobComponent implements OnInit, OnChanges {
     } 
   }
 
-  rerollFirstSkill(isHelpdesker?: boolean) {
-    if (isHelpdesker) {
+  rerollFirstSkill(getExtraStartSkill?: boolean) {
+    if (getExtraStartSkill) {
       this.firstSkillObj = this.getSkills(this.job.first_skill, this.firstSkillObj, this.extraSkillObj.prevValue);
     } else {
       this.firstSkillObj = this.getSkills(this.job.first_skill, this.firstSkillObj);

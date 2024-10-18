@@ -13,6 +13,11 @@ export const PAST = [
     'were clinically dead for 5 minutes',
 ];
 
+export const ISSUES = [
+    'your confusing relationship with Martha H. from HR and her evil twin, Anastasia H. from Facilities',
+    'that you\'ve been roped into overtime that just won\'t end',
+]
+
 export const REASON = [
     'you suffer from a rare illness and a need insurance',
     'have a family to support',
@@ -249,12 +254,12 @@ export const JOBS = [
             "<strong>Once per day</strong>, spend one round in a fight to analyze your opponent and find their weakness. <strong>Your next attack will deal double damage</strong>. Outside of a fight, you can examine a situation and discover a perfect solution (e.g. a way to escape a trap, a weakness in the code, etc.). <strong>Costs 1 Undo</strong>."
         ],
         second_skill: [
-            '<strong class="non-clickable">False Negative.</strong> Your or others’ defects are omitted. Negate all harmful effects (bleed, poison etc.) and heal d4 HP.',
-            '<strong class="non-clickable">False Positive.</strong> Make yourself or others look powerful. Lower all your target’s DR by 2 for d4 hours.',
-            '<strong class="non-clickable">Critical Error.</strong> Detonate a fatal flaw in reality. Deal d6 damage to everyone in a 15 meters radius. Random objects might be spawned.',
-            '<strong class="non-clickable">Leakage.</strong> Open the bridge between realities where the line is thinnest. Everyone is transported to the Mundane for d4 rounds.',
-            '<strong class="non-clickable">Bugs.</strong> When accessing a computer or server, materialize hidden bugs in the code. They’ll attack one target for d4 damage/d4 rounds and then fade in a hallucinogenic mist.',
-            '<strong class="non-clickable">Cleansing Ritual.</strong> Heal (if successful) or damage (if failed) everyone in proximity for a d6 HP. Can’t move or perform any other actions during the ritual.',
+            '<strong>False Negative.</strong> Your or others’ defects are omitted. Negate all harmful effects (bleed, poison etc.) and heal d4 HP.',
+            '<strong>False Positive.</strong> Make yourself or others look powerful. Lower all your target’s DR by 2 for d4 hours.',
+            '<strong>Critical Error.</strong> Detonate a fatal flaw in reality. Deal d6 damage to everyone in a 15 meters radius. Random objects might be spawned.',
+            '<strong>Leakage.</strong> Open the bridge between realities where the line is thinnest. Everyone is transported to the Mundane for d4 rounds.',
+            '<strong>Bugs.</strong> When accessing a computer or server, materialize hidden bugs in the code. They’ll attack one target for d4 damage/d4 rounds and then fade in a hallucinogenic mist.',
+            '<strong>Cleansing Ritual.</strong> Heal (if successful) or damage (if failed) everyone in proximity for a d6 HP. Can’t move or perform any other actions during the ritual.',
         ],
         stats: [
             {
@@ -321,8 +326,57 @@ export const JOBS = [
                 mod: -3
             },
         ],
-    }
+    },
+    {
+        name: 'supplier',
+        extra: [],
+        descrip: "This building is up and running largely because of you. <strong>You are responsible for all the equipment and supplies</strong>, for the office layout and safety. You know every nook and cranny of this building and every <strong>dirty secret</strong> that resonates within its walls. They think you don\'t see or hear, as they don\'t see or hear you. Well, <strong>the shadows suit you</strong>.",
+        skill_descrips: [
+            'You\'ve seen some stuff nobody is supposed to see. Now you know two of these:',
+            'You specialize in one of these:'
+        ],
+        first_skill: [
+            'A dirty secret of someone from the <strong>executive team</strong>',
+            'Ingredients and requirements for 2 random <strong>Rituals</strong>',
+            'The HR database <strong>password</strong>',
+            'The secret escape from the building (<strong>you\'re working in</strong>)',
+            'Two random <strong>Incantations</strong>',
+            'Name of all <strong>demons and employees</strong> of your company',
+        ],
+        second_skill: [
+            '<strong>Equipment.</strong> Improvised and makeshift weapons deal <strong>+2 damage</strong> in your hands and <strong>don\'t break during combat</strong>',
+            '<strong>Resupply.</strong> When using consumable items, test <strong>Knowledge DR12</strong> to see if the item is used up or not',
+            '<strong>Shortcuts.</strong> Lockpicking or Hacking rolls to open regular doors is <strong>-2DR</strong>',
+            '<strong>Coffee.</strong> The benefits of coffee are <strong>doubled for you</strong>',
+            '<strong>Repairs.</strong> You can test <strong>DR12 Knowledge</strong> to make a hasty repair of equipment or machines that lasts <strong>2d8 rounds</strong>',
+            '<strong>Electricity.</strong> When accessing a fuse box, can test <strong>Knowledge DR10</strong> to overload a connected machine, or turn off lighting or security systems to an area for <strong>2d6 rounds</strong>',
+        ],
+        stats: [
+            {
+                name: '$avings',
+                mod: '2d6x5'
+            },
+            {
+                name: 'undos',
+                mod: 'd3'
+            },
+            {
+                name: 'hp',
+                mod: '4'
+            },
+            {
+                name: 'flexibility',
+                mod: 2
+            },
+            {
+                name: 'soft skills',
+                mod: -2
+            },
+        ],
+    },
 ];
+
+
 
 export const NAMES = [
     'Jonn',
@@ -344,7 +398,7 @@ export const NAMES = [
     'Sammsy',
     'Barbrry',
     'Dantel',
-    'Debr’ah',
+    'Debr\'ah',
     'Thommy',
     'Ama',
     'Brayn',
@@ -393,4 +447,4 @@ export const NAMES = [
     'Alamina',
     'Bozena',
     'Loyza',
-]
+];

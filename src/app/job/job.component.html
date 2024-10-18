@@ -15,12 +15,12 @@
             @if (job.first_skill.length === 1) {
                 <span [innerHTML]="job.skill_descrips[0]" class="non-clickable"></span>
             } @else {
-                <span [innerHTML]="job.skill_descrips[0]" (click)="rerollSkills(isHelpDesker)" class="clickable"></span>
+                <span [innerHTML]="job.skill_descrips[0]" (click)="rerollSkills(getExtraStartSkill)" class="clickable"></span>
             }
-            @if (isHelpDesker) {
+            @if (getExtraStartSkill) {
                 <ul>
                     <li>
-                        <div (click)="rerollFirstSkill(isHelpDesker)" [innerHTML]="firstSkillObj.descrip"></div>
+                        <div (click)="rerollFirstSkill(getExtraStartSkill)" [innerHTML]="firstSkillObj.descrip"></div>
                     </li>
                     <li>
                         <div (click)="rerollExtraSkill()" [innerHTML]="extraSkillObj.descrip"></div>
