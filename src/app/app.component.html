@@ -21,8 +21,16 @@
     <div class="body-layout">
       <app-resume [job]="jobObj" class="resume"></app-resume>
       <app-identity [job]="jobObj"></app-identity>
-      <app-job (getNewJob)="getJob()" [job]="jobObj"></app-job>
-      <app-equipment [job]="jobObj" class="equipment"></app-equipment>
+      <app-job
+        (emitIncantOrRitual)="getIncantOrRitual($event)"
+        (getNewJob)="getJob()"
+        [job]="jobObj">
+      </app-job>
+      <app-equipment
+        [getIncantOrRitual]="hasIncantOrRitual"
+        [job]="jobObj"
+        class="equipment">
+      </app-equipment>
     </div>
   </section>
 </span>

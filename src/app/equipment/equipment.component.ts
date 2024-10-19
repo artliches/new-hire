@@ -16,6 +16,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
   ) {}
 
   @Input() job: any;
+  @Input() getIncantOrRitual: {first: string, other: string} = {first: '', other: ''};
 
   armorObj = {
     name: '',
@@ -45,27 +46,74 @@ export class EquipmentComponent implements OnInit, OnChanges {
     prevValue: -1,
   };
 
-  incantObj = [{
-    name: '',
-    descrip: '',
-    prevValue: -1
-  }];
+  incantObj: any = [];
+  incantsEmpty: boolean = true;
+  modifiedIncantArray: Array<any> = [];
 
   ritualObj = {
     descrip: '',
     prevValue: -1,
   };
 
+
   ngOnInit(): void {
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.rerollAll();
+    if (changes['job']) {
+      if (changes['job'].currentValue !== changes['job'].previousValue || changes['job'].isFirstChange()) {
+        this.incantObj = [];
+        this.rerollAll();
+      }
+    }
+    if (this.job.name === 'supplier' && changes['getIncantOrRitual']) {
+      if (
+        changes['getIncantOrRitual'].currentValue['first'].includes('Incantations') ||
+        changes['getIncantOrRitual'].currentValue['other'].includes('Incantations')
+      ) {
+        // do we already have incants?
+        if (this.incantObj.length > 1) {
+          // we already have incants, don't add another
+        }
+        else {
+          for (let i = 0; i < 2; i++) {
+            this.rerollIncantations(false);
+          }
+        }
+      } else if (
+        changes['getIncantOrRitual'].previousValue
+      ) {
+        if (
+          changes['getIncantOrRitual'].previousValue['first'].includes('Incantations') ||
+          changes['getIncantOrRitual'].previousValue['other'].includes('Incantations')
+        ) {
+          // we can at most have 3 incants
+          for (let i = 1; i >= 0; i --) {
+            const pos = INCANTATIONS.map(x => x.name).indexOf(this.incantObj[i].name);
+            this.modifiedIncantArray.splice(pos, 0, INCANTATIONS[pos]);
+            this.incantObj.pop();
+          }
+        }
+      }
+    }
   }
 
   rerollAll() {
-    this.rerollWeapon();
-    this.rerollArmor();
+    this.modifiedIncantArray = JSON.parse(JSON.stringify(INCANTATIONS));
+    if (this.job.name === 'supplier') {
+      // check if there's a special incant and remove it.
+      // this keeps the extra incants if the supplier pulled them
+      if (this.incantObj.length > 2) {
+        this.incantObj.shift();
+      }
+    }
+    if (this.job.name === 'designer') {
+      this.incantObj = [];
+      this.rerollIncantations(false);
+    }
+    this.rerollWeapon(this.job.name === 'designer');
+    this.rerollArmor(this.job.name === 'designer');
     this.rerollBags();
     this.rerollEssentials();
     this.rerollSpecials();
@@ -90,20 +138,64 @@ export class EquipmentComponent implements OnInit, OnChanges {
     };
   }
 
-  rerollIncantations(isSupplier?: boolean) {
-    // const newIncant = {
-    //   name: '',
-    //   descrip: '',
-    //   prevValue: -1
-    // }
-    // this.incantObj.push(newIncant);
-    const randNum = this.randomNumber.getRandomNumber(0, INCANTATIONS.length - 1, this.incantObj[0].prevValue);
-    const data = INCANTATIONS[randNum];
-    this.incantObj[0] = {
-      name: data.name,
-      descrip: data.descrip,
-      prevValue: randNum
-    };
+  removeIncantation(index: number, rollSpecials: boolean) {
+    const pos = INCANTATIONS.map(x => x.name).indexOf(this.incantObj[index].name);
+    this.modifiedIncantArray.splice(pos, 0, INCANTATIONS[pos]);
+    this.incantObj.splice(index, 1);
+    if (rollSpecials) this.rerollSpecials();
+  }
+
+  rerollIncantations(isSpecial: boolean, incantIndex?: number,) {  
+    if (this.incantsEmpty) {
+      // this is empty
+      const randNum = this.randomNumber.getRandomNumber(0, INCANTATIONS.length - 1);
+      const data = INCANTATIONS[randNum];
+      const newIncant = {
+        name: data.name,
+        descrip: data.descrip,
+        prevValue: randNum,
+        isSpecial: isSpecial
+      };
+      this.incantObj.push(newIncant);
+      this.modifiedIncantArray.splice(randNum, 1);
+
+    } else if (incantIndex  !== undefined) {
+      // not empty, but not new
+      const randNum = this.randomNumber.getRandomNumber(0, this.modifiedIncantArray.length - 1);
+      const data = this.modifiedIncantArray[randNum];
+      const pos = INCANTATIONS.map(x => x.name).indexOf(this.incantObj[incantIndex].name);
+      
+      this.incantObj[incantIndex] = {
+        name: data.name,
+        descrip: data.descrip,
+        prevValue: randNum,
+        isSpecial: isSpecial
+      };
+      //remove new value
+      this.modifiedIncantArray.splice(randNum, 1);
+      // //return the value
+      this.modifiedIncantArray.splice(pos, 0, INCANTATIONS[pos]);
+    } else {
+      // not empty and new
+      const randNum = this.randomNumber.getRandomNumber(0, this.modifiedIncantArray.length - 1);
+      const data = this.modifiedIncantArray[randNum];
+      const newIncant = {
+        name: data.name,
+        descrip: data.descrip,
+        prevValue: randNum,
+        isSpecial: isSpecial
+      };
+
+      if (isSpecial) {
+        // put it in the front
+        this.incantObj.unshift(newIncant);
+      } else {
+        this.incantObj.push(newIncant);
+      }
+
+      this.modifiedIncantArray.splice(randNum, 1);
+    }
+    this.incantsEmpty = this.incantObj.length === 0;
   }
 
   rerollRituals() {
@@ -119,14 +211,9 @@ export class EquipmentComponent implements OnInit, OnChanges {
         descrip: '',
         prevValue: randNum
       };
-      this.rerollIncantations();
+      this.rerollIncantations(true);
     }
     else {
-      this.incantObj[0] = {
-        name: '',
-        descrip: '',
-        prevValue: -1
-      },
       this.specialObj = {
         descrip: data,
         prevValue: randNum,
@@ -134,7 +221,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
     }
   }
 
-  rerollWeapon() {
+  rerollWeapon(isDesigner?: boolean) {
     const randNum = this.getRandomNum(6, this.weaponObj.prevValue);
     const data = OFFICE_TOOLS[randNum];
     this.weaponObj = {
@@ -144,8 +231,8 @@ export class EquipmentComponent implements OnInit, OnChanges {
     };
   }
 
-  rerollArmor() {
-    const randNum = this.getRandomNum(4, this.armorObj.prevValue);
+  rerollArmor(isDesigner?: boolean) {
+    const randNum = this.getRandomNum(isDesigner ? 2 : 4, this.armorObj.prevValue);
     const data = SUITS[randNum];
     this.armorObj = {
       name: data.name,

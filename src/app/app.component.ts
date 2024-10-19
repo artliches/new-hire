@@ -37,6 +37,11 @@ export class AppComponent {
     prevValue: -1,
   };
 
+  hasIncantOrRitual = {
+    first: '',
+    other: ''
+  };
+
   ngOnInit(): void {
     this.getJob();   
   }
@@ -55,6 +60,10 @@ export class AppComponent {
       stats: chosenJob?.stats,
       prevValue: randNum
     };
+  }
+
+  getIncantOrRitual(event: any) {
+    this.hasIncantOrRitual = event;
   }
 
   private getRandomNum(array: Array<any>, infoObj: {descrip: string, prevValue: number}) {

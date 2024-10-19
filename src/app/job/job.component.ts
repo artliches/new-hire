@@ -13,7 +13,8 @@ export class JobComponent implements OnInit, OnChanges {
     private randomNumber: RandomNumberService
   ) {}
   @Input() job: any;
-  @Output() getNewJob: EventEmitter<boolean> = new EventEmitter();;
+  @Output() getNewJob: EventEmitter<boolean> = new EventEmitter();
+  @Output() emitIncantOrRitual: EventEmitter<any> = new EventEmitter();
   getExtraStartSkill: boolean = false;
   extraIgnore: number = -1;
   showAllSkills: boolean = false;
@@ -74,10 +75,23 @@ export class JobComponent implements OnInit, OnChanges {
     } else {
       this.firstSkillObj = this.getSkills(this.job.first_skill, this.firstSkillObj);
     }
+    this.emitIncantOrRitual.emit(
+      {
+        first: this.firstSkillObj.descrip,
+        other: this.extraSkillObj.descrip
+      }
+    );
   }
 
   rerollExtraSkill() {
     this.extraSkillObj = this.getSkills(this.job.first_skill, this.extraSkillObj, this.firstSkillObj.prevValue);
+    // this.checkForIncantsAndRituals(this.extraSkillObj.descrip);
+    this.emitIncantOrRitual.emit(
+      {
+        first: this.firstSkillObj.descrip,
+        other: this.extraSkillObj.descrip
+      }
+    );
   }
 
   rerollSecondSkill() {

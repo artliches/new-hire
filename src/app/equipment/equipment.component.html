@@ -6,7 +6,7 @@
         <ul>
             <li>
                 <div>
-                    <span (click)="rerollWeapon()" class="clickable">{{weaponObj.name | titlecase}}</span>
+                    <span (click)="rerollWeapon(job.name === 'designer')" class="clickable">{{weaponObj.name | titlecase}}</span>
                     @if (weaponObj.descrip) {
                         ,
                     }
@@ -15,7 +15,7 @@
             </li>
             <li>
                 <div>
-                    <span><span (click)="rerollArmor()" class="clickable">{{armorObj.name | titlecase}}</span>,</span> <span [innerHTML]="armorObj.descrip"></span>
+                    <span><span (click)="rerollArmor(job.name === 'designer')" class="clickable">{{armorObj.name | titlecase}}</span>,</span> <span [innerHTML]="armorObj.descrip"></span>
                 </div>
             </li>
             <li>
@@ -36,14 +36,14 @@
                     <span [innerHTML]="specialObj.descrip" (click)="rerollSpecials()"></span>
                 </li>
             }
-            @if (incantObj && incantObj[0].descrip) {
+            @if (incantObj && incantObj.length > 0) {
                 @for (incant of incantObj; track $index) {
                     <li>
                         <div>
-                            @if ($index === 0) {
-                                <span (click)="rerollSpecials()" class="clickable">{{incant.name}}</span>
+                            @if (incant.isSpecial) {
+                                <span (click)="removeIncantation($index, true)" class="clickable">{{incant.name}}</span>
                             } @else {
-                                <span (click)="rerollIncantations()" class="clickable">{{incant.name}}</span>
+                                <span (click)="rerollIncantations(false, $index)" class="clickable">{{incant.name}}</span>
                             }
                             <span [innerHTML]="incant.descrip"></span>
                         </div>
