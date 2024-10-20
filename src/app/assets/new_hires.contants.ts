@@ -296,12 +296,12 @@ export const JOBS = [
             'You carry one important artifact imbued with the power of nostalgia. You can use it only <strong>once per day</strong>'
         ],
         first_skill: [
-            '<strong>A comic book.</strong> Weirdly enough, it tells the story of your life. Even the future. But as often as it shows the truth, it spreads lies (50/50% chance).',
+            '<strong>A comic book.</strong> Weirdly enough, it tells the story of your life. Even the future. But as often as it shows the truth, it spreads lies (<strong>50/50% chance</strong>).',
             '<strong>An old CD mixtape.</strong> Play music or throw it for d4 damage. Victims test Integrity DR8 or sing the songs from the mixtape until they are dead, or the CD is removed from their body.',
-            '<strong>Photo of your pet.</strong> Animate your pet for d4 hours. It comes with additional teeth, tentacles, or other unnatural body parts. Knowledge +d4 HP, -d2 armor, and feral attack (d4). Once it’s dead it’s gone forever.',
-            '<strong>Coffee mug that says “Geek.”</strong> Drink from it and test Integrity DR12. On a success, decrease DR of all Knowledge tests by 4 for a day. If failed, increase DR of all Soft Skills and Flexibility by 2 for a day.',
-            '<strong>Sketchbook.</strong> You can draw a location within your reality and teleport to it. Roll d6 to determine the quality and effect of your drawing: pretty bad sketch 1-2, doesn’t work, take d4 damage; barely recognizable 3-4, you are teleported somewhere else; good enough 5-6, you teleport to the place you drew.',
-            '<strong>Key chain with an anime character.</strong> Put this on any key, it will open all doors. Test Knowledge DR12 to see whether the opened door leads to where it should (success) or to a place filled with d6 enemies (fail).',
+            '<strong>Photo of your pet.</strong> Animate your pet for <strong>d4 hours</strong>. It comes with additional teeth, tentacles, or other unnatural body parts. Knowledge +d4 HP, -d2 armor, and feral attack (d4). Once it’s dead <strong>it’s gone forever</strong>.',
+            '<strong>Coffee mug that says “Geek.”</strong> Drink from it and test <strong>Integrity DR12</strong>. On a success, decrease DR of all Knowledge tests by 4 for a day. If failed, <strong>increase DR of all Soft Skills and Flexibility by 2 for a day</strong>.',
+            '<strong>Sketchbook.</strong> You can draw a location within your reality and teleport to it. <strong>Roll d6</strong> to determine the quality and effect of your drawing: <ul><li><strong>1-2, pretty bad sketch.</strong> doesn’t work, take d4 damage</li><li><strong>3-4, barely recognizable.</strong> you are teleported somewhere else</li><li><strong>5-6, good enough.</strong> you teleport to the place you drew.</li></ul>',
+            '<strong>Key chain with an anime character.</strong> Put this on any key, it will open all doors. Test <strong>Knowledge DR12</strong> to see whether the opened door leads to where it should (success) or to a place filled with d6 enemies (fail).',
         ],
         second_skill: [],
         stats: [
@@ -502,51 +502,62 @@ export const SPECIALS = [
 export const INCANTATIONS = [
     {
         name: 'Larval Migraine.',
-        descrip: ' Create a maggot inside a human brain, dealing d6 damage and taking one of the senses.',
+        descrip: ' Create a maggot inside a human brain, dealing <strong>d6 damage</strong> and taking one of the senses.',
     },
     {
         name: 'Tongues.',
-        descrip: ' Understand demon language for a day but lose the ability to speak for a day.'
+        descrip: ' Understand demon language for a day but <strong>lose the ability to speak for a day</strong>.'
     },
     {
         name: 'Hourglass.',
-        descrip: ' Make d4 targets think the end of the world just started.'
+        descrip: ' Make <strong>d4 targets</strong> think the end of the world just started.'
     },
     {
         name: 'Caffine Descend.',
-        descrip: ' Make one human target eternally dependent on constant caffeine intake to survive. If deprived of coffee for longer than an hour it suffers excruciating pain, losing 1HP (if it goes to null, it dies).'
+        descrip: ' Make one human target eternally dependent on constant caffeine intake to survive. If deprived of coffee for <strong>longer than an hour</strong> it suffers excruciating pain, losing 1HP (<strong>if it goes to null, it dies</strong>).'
     },
     {
         name: 'Smart Casual.',
-        descrip: ' Change appearance and voice for d20 minutes.'
+        descrip: ' Change appearance and voice for <strong>d20 minutes</strong>.'
     },
     {
         name: 'Intern Affairs.',
-        descrip: ' Summon d4 faithful interns (no armor, d2 scratch, worthless).'
+        descrip: ' Summon <strong>d4 faithful interns</strong> (no armor, d2 scratch, <strong>worthless</strong>).'
     },
     {
         name: 'Doom Merger.',
-        descrip: ' Link d4 targets minds so anything that happens to one happens to all, including damage taken.'
+        descrip: ' Link <strong>d4 targets</strong> minds so anything that happens to one happens to all, including damage taken.'
     },
     {
         name: 'Cubicle Surprise.',
-        descrip: ' For 4 minutes enclose one target in a 2x2x2m cubicle filled with d6: 1-2 water 3-4 coffee 5-6 pineapple jelly. Swim to escape (test Flexibility DR12) or hold your breath (test Hard Skills DR12) until the incantation ends.'
+        descrip: 
+        `For <strong>4 minutes enclose one target</strong> in a 2x2x2m cubicle filled with <strong>d6</strong>:
+        <div class="internal-list">
+            <ul>
+                <li><strong>1-2.</strong> water</li>
+                <li><strong>3-4.</strong> coffee</li>
+                <li><strong>5-6.</strong> pineapple jelly</li>
+            </ul>
+        </div>
+        <div>
+            Swim to escape (test <strong>Flexibility DR12</strong>) or hold your breath (test <strong>Hard Skills DR12</strong>) until the incantation ends.
+        </div>`
     },
     {
         name: 'Persona Non Grata.',
-        descrip: ' The target becomes invisible for d6 turns/minutes or until their heart rate exceeds 70 BPM.'
+        descrip: ' The target becomes invisible for <strong>d6 turns/minutes</strong> or until their heart rate exceeds 70 BPM.'
     },
     {
         name: 'Downgrade.',
-        descrip: ' Lowers target’s HP to d6and Motivation to d4.'
+        descrip: ' Lowers target’s HP to <strong>d6</strong> and Motivation to <strong>d4</strong>.'
     },
     {
         name: 'Brainstorm.',
-        descrip: ' Confuse d4 targets for 2 rounds. They will attack each other in a frenzy.'
+        descrip: ' Confuse <strong>d4</strong> targets for <strong>2 rounds</strong>. They will attack each other in a frenzy.'
     },
     {
         name: 'One Last Task.',
-        descrip: ' Bring back a human to life with 1HP and total, indivisible attention to one specific task. It will die after the task is done.'
+        descrip: 'Bring back a human to life with <strong>1HP</strong> and total, indivisible attention to one specific task. <strong>It will die after the task is done</strong>.'
     },
 ];
 

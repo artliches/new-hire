@@ -129,6 +129,21 @@ body {
     font-size: 16px;
 }
 
+ul {
+    list-style-type: square;
+    margin: 0;
+    padding: 0 0 0 2rem;
+    li:not(:last-of-type) {
+        margin-bottom: 0.3rem;
+    }
+    div.internal-list {
+        padding-left: 2rem;
+        li:not(:last-of-type) {
+            margin-bottom: 0rem;
+        }
+    }
+}
+
 .clickable {
     width: max-content;
     padding: 0 1rem;
@@ -191,7 +206,7 @@ body {
             place-self: center;
             z-index: 2;
             grid-area: title;
-            font-size: 2rem;
+            font-size: 3rem;
             margin: 0;
             padding: 0;
             letter-spacing: 5px;
@@ -203,7 +218,7 @@ body {
         em {
             z-index: 2;
             grid-area: detail;
-            font-size: 0.8rem;
+            font-size: 1rem;
         }
     }
     .toolbar {
