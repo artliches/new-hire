@@ -36,20 +36,25 @@
                     <span [innerHTML]="specialObj.descrip" (click)="rerollSpecials()"></span>
                 </li>
             }
-            @if (incantObj && incantObj.length > 0) {
-                @for (incant of incantObj; track $index) {
-                    <li>
-                        <div>
-                            @if (incant.isSpecial) {
-                                <span (click)="removeIncantation($index, true)" class="clickable">{{incant.name}}</span>
-                            } @else {
-                                <span (click)="rerollIncantations(false, $index)" class="clickable">{{incant.name}}</span>
-                            }
-                            <span [innerHTML]="incant.descrip"></span>
-                        </div>
-                    </li>
-                }
-            }
         </ul>
+        @if (incantObj && incantObj.length > 0) {
+            <div class="incant-layout">
+                <div class="incant-title">Incantations</div>
+                <ul>
+                    @for (incant of incantObj; track $index) {
+                        <li>
+                            <div>
+                                @if (incant.isSpecial) {
+                                    <span (click)="removeIncantation($index, true)" class="clickable">{{incant.name}}</span>
+                                } @else {
+                                    <span (click)="rerollIncantations(false, $index)" class="clickable">{{incant.name}}</span>
+                                }
+                                <span [innerHTML]="incant.descrip"></span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
     </span>
 </div>
