@@ -16,6 +16,21 @@ export const PAST = [
 export const ISSUES = [
     'your confusing relationship with Martha H. from HR and her evil twin, Anastasia H. from Facilities',
     'that you\'ve been roped into overtime that just won\'t end',
+    'a tiny demon relentlessly biting your ankle',
+    'that your Internet is the slowest in the whole office',
+    'that one manager who will just do anything to humiliate you',
+    'that you\'ve got 2137 unread emails and no time to go through them all',
+    'that you\'re not getting a promotion because the person who promised it has vanished',
+    'your crippling allergy to ALL the fruits being offered on Fruit’s Thursdays',
+    'poor work-life balance, which is getting closer to a work-death balance',
+    'the one printer that will NOT connect in a million years',
+    'the overly strict dress code, unabling you from getting comfy ',
+    'a complete lack of privacy in the bathroom (due to dozens of cameras)',
+    'a broken piece of your equipment',
+    'that mandatory training to be completed asap',
+    'lack of guidance on how to perform any task in this company',
+    'the deeply unfair workload distribution',
+
 ]
 
 export const REASON = [
@@ -465,7 +480,7 @@ export const BAGS = [
     },
     {
         name: 'Bag of Wonders',
-        descrip: 'holds ∞ items; roll flat d20, 12 or more, you get the item you wanted otherwise you pull something horrible)'
+        descrip: 'holds <strong> ∞ items</strong>; roll flat d20, 12 or more, you get the item you wanted otherwise you pull <strong>something horrible</strong>)'
     },
 ];
 

@@ -48,6 +48,10 @@ export class AppComponent {
     this.getJob();   
   }
 
+  print() {
+    window.print();
+  }
+
   rerollAll() {
     this.getJob();
     this.triggerReroll = !this.triggerReroll;
