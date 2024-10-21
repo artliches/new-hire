@@ -34,7 +34,7 @@ export const ISSUES = [
 ]
 
 export const REASON = [
-    'you suffer from a rare illness and a need insurance',
+    'you suffer from a rare illness and need insurance',
     'have a family to support',
     'you have very low self-esteem; this is all you deserve',
     'your parents said this is what success looks like',
@@ -487,9 +487,9 @@ export const BAGS = [
 export const ESSENTIALS = [
     '<span class="clickable">Set of cables</span>',
     '<span class="clickable">Flashlight</span> with battery for <strong>d4+Hard Skills hrs</strong>',
-    'C4 explosive left by an ex-employee (<strong>d12 damage in 10m radius</strong>)',
+    '<span class="clickable">C4 explosive </span>left by an ex-employee (<strong>d12 damage in 10m radius</strong>)',
     '<span class="clickable">First aid kit</span>; d4 uses, stops bleeding, <strong>heals d6 HP</strong>',
-    'Disposable <strong class="clickable">electronic key-hacker</strong>; d3 uses (<strong>open electronic doors</strong>)',
+    'Disposable <span class="clickable">electronic key-hacker</span>; d3 uses (<strong>open electronic doors</strong>)',
     'A <span class="clickable">USB drive</span> with d3 viruses (<strong>test Knowledge DR12 to hack</strong>)',
     '<span class="clickable">Golden credit card</span> with <strong>d6x100¤</strong> on it',
     'Set of d6 <span class="clickable">paper clips</span> (<strong>test Flexibility DR12 to open doors</strong>)',

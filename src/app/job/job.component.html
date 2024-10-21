@@ -1,6 +1,12 @@
 <div class="corp-card">
     <span (click)="rerollJob()" class="card-title clickable">
-      you are a {{job.name}}!
+      you are 
+      @if (job.name === 'engineer') {
+        an
+      } @else {
+        a
+      }
+      {{job.name}}!
     </span>
     <span class="card-body">
         <em [innerHTML]="job.descrip"></em>

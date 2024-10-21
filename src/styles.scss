@@ -240,6 +240,8 @@ ul {
             "title"
             "detail";
         h1 {
+            display: flex;
+            gap: 0.5rem;
             width: min-content;
             place-self: center;
             z-index: 2;
@@ -415,6 +417,7 @@ ul {
                 ".  content .";
             .body-layout {
                 padding: 0;
+                margin-bottom: 1rem;
             }
         }
     }
@@ -433,6 +436,9 @@ ul {
         color: black;
     }
     .corp-layout {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.8rem;
         header {
             color: black;
         }
@@ -440,32 +446,11 @@ ul {
             display: none;
         }
         .corp-body {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-auto-rows: min-content;
-            grid-template-areas:
-                "content";
             border-color: white;
-            .body-layout {
-                grid-area: content;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: min-content;
-                .equipment {
-                    grid-area: 3 / span 2;
-                }
-                .corp-card {
-                    &:last-child {
-                        grid-area: 3 / span 2;
-                    }
-                }
-                .resume {
-                    grid-area: 1 / span 2;
-                }
-            }
             .corp-card {
                 border-color: black;
                 .card-title {
+                    font-size: 1rem !important;
                     border: 1px solid black;
                     color: black;
                 }
