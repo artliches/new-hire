@@ -16,6 +16,7 @@ $lighter-lines: lighten($excel-border, 20%);
 $index-lines: 1px dotted lighten(blue, 30%);
 
 :root {
+    --print-font-size: 0.75rem;
     --hover-color: #010203;
     --clickable-background: #010203;
     --clickable-color: #FFE900;
@@ -438,9 +439,15 @@ ul {
     .corp-layout {
         display: flex;
         flex-direction: column;
-        font-size: 0.8rem;
+        font-size: var(--print-font-size);
         header {
             color: black;
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+        footer {
+            font-size: 10px;
         }
         .toolbar {
             display: none;
@@ -450,15 +457,19 @@ ul {
             .corp-card {
                 border-color: black;
                 .card-title {
-                    font-size: 1rem !important;
+                    font-size: var(--print-font-size) !important;
                     border: 1px solid black;
                     color: black;
                 }
                 .card-body {
+                    ol {
+                        font-size: 10px;
+                    }
                     .incant-layout {
                         border-color: black;
                         .incant-title, .title-descrip {
                             color: black;
+                            font-size: var(--print-font-size);
                         }
                         li {
                             color: black;
