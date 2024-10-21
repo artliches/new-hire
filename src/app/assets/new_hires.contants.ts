@@ -561,6 +561,69 @@ export const INCANTATIONS = [
     },
 ];
 
+export const RITUALS = [
+    {
+        name: `Ritual of Caacrinolaas.`,
+        descrip: ` Gain <strong>invisibility</strong> for a day.`,
+        ingredients: `Demon’s horn, 50g of pure Arabica, a pinch of copper.`,
+        condition: `Darkened room (20 minutes)`,
+    },
+    {
+        name: `Ritual of Forneus.`,
+        descrip: ` Gain <strong>increased senses</strong> for a day (<strong>all tests -DR4</strong>).`,
+        ingredients: `Blood of a virgin, a white poem, sea salt.`,
+        condition: `Body of water in close proximity (an hour)`,
+    },
+    {
+        name: `Ritual of Baalfogrif.`,
+        descrip: ` Gain d666x10¤.`,
+        ingredients: `Teeth of a pauper, eye of a miser, secret of a thief.`,
+        condition: `Inside of a bank (d20 minutes).`,
+    },
+    {
+        name: `Ritual of Pursan.`,
+        descrip: ` You can ask one question about the <strong>past</strong> and one question about the <strong>future</strong>. The truth will be told.`,
+        ingredients: `500g of gold, a snake, an eyeball.`,
+        condition: `Pure silence (d10 minutes).`,
+    },
+    {
+        name: `Ritual of Leviathan.`,
+        descrip: ` Gain a random <strong>Occult Weapon</strong>.`,
+        ingredients: `A weapon of murder, a bag of groceries, Salmonella.`,
+        condition: `Ritualistic dance (duration of the dance).`,
+    },
+    {
+        name: `Ritual of Rosier.`,
+        descrip: ` Lower DR of all <strong>flirting and romance tests by 8</strong> for a day. Beings who fall in love with you during that time will follow you relentlessly till the end of time`,
+        ingredients: `Heart of a mammal, broken arrow, seed.`,
+        condition: `Exactly six naked people (d6 minutes).`,
+    },
+    {
+        name: `Ritual of Muurmux.`,
+        descrip: ` Gain an advantage on all <strong>Knowledge</strong> tests (<strong>roll 2d20, pick the higher result</strong>) as long as you sing and hum instead of talking. Break the melody and <strong>lose the favor</strong>.`,
+        ingredients: `Demon’s breath.`,
+        condition: `Singing (until you lose your voice).`,
+    },
+    {
+        name: `Ritual of Aypreress.`,
+        descrip: ` Gain <strong>2d10 HP</strong>, even if it exceeds your max HP. Additional HP cannot be restored over the limit.`,
+        ingredients: `Human sacrifice.`,
+        condition: `Consuming the heart of the sacrifice (how long it takes to eat).`,
+    },
+    {
+        name: `Ritual of Leeray.`,
+        descrip: ` Your next attack is guaranteed to hit and inflicts a <strong>rot</strong> that deals <strong>1 dmg/round until the target is dead</strong>. It cannot be blocked, countered, or in any other way mitigated. (<strong>However, rot can be cured… possibly</strong>)`,
+        ingredients: `The performer\'s hand and eye.`,
+        condition: `A day without a word (length of the Ritual).`,
+    },
+    {
+        name: `Ritual of Barbotis.`,
+        descrip: ` Summon a <strong>random demon</strong> that will follow you for a day. After that time it will become <strong>hostile</strong>.`,
+        ingredients: `Alcohol, a fingernail.`,
+        condition: `A little bit of luck [60% chance to work] (d6 minutes).`,
+    },
+];
+
 export const NAMES = [
     'Jonn',
     'Gene',

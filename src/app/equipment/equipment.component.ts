@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { RandomNumberService } from '../services/random-number.service';
-import { BAGS, ESSENTIALS, INCANTATIONS, OFFICE_TOOLS, SPECIALS, SUITS } from '../assets/new_hires.contants';
+import { BAGS, ESSENTIALS, INCANTATIONS, OFFICE_TOOLS, RITUALS, SPECIALS, SUITS } from '../assets/new_hires.contants';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -50,11 +50,9 @@ export class EquipmentComponent implements OnInit, OnChanges {
   incantsEmpty: boolean = true;
   modifiedIncantArray: Array<any> = [];
 
-  ritualObj = {
-    descrip: '',
-    prevValue: -1,
-  };
-
+  ritualObj: any = [];
+  ritualsEmpty: boolean = true;
+  modifiedRitualArray: Array<any> = [];
 
   ngOnInit(): void {
 
@@ -96,11 +94,38 @@ export class EquipmentComponent implements OnInit, OnChanges {
           }
         }
       }
+
+      if (
+        changes['getIncantOrRitual'].currentValue['first'].includes('Rituals') ||
+        changes['getIncantOrRitual'].currentValue['other'].includes('Rituals')
+      ) {
+          // do we already have rituals?
+          if (this.ritualObj.length > 1) {
+            // we already have incants, don't add another
+          }
+          else {
+            for (let i = 0; i < 2; i++) {
+              this.rerollRituals();
+            }
+          }
+      } else if (
+        changes['getIncantOrRitual'].previousValue
+      ) {
+        if (
+          changes['getIncantOrRitual'].previousValue['first'].includes('Rituals') ||
+          changes['getIncantOrRitual'].previousValue['other'].includes('Rituals')
+        ) {
+          // remove all incants
+          this.modifiedRitualArray = JSON.parse(JSON.stringify(RITUALS));
+          this.ritualObj = [];
+        }
+      }
     }
   }
 
   rerollAll() {
     this.modifiedIncantArray = JSON.parse(JSON.stringify(INCANTATIONS));
+    this.modifiedRitualArray = JSON.parse(JSON.stringify(RITUALS));
     if (this.job.name === 'supplier') {
       // check if there's a special incant and remove it.
       // this keeps the extra incants if the supplier pulled them
@@ -198,8 +223,54 @@ export class EquipmentComponent implements OnInit, OnChanges {
     this.incantsEmpty = this.incantObj.length === 0;
   }
 
-  rerollRituals() {
+  rerollRituals(ritualIndex?: number) {
+    if (this.ritualsEmpty) {
+      const randNum = this.randomNumber.getRandomNumber(0, RITUALS.length - 1);
+      const data = RITUALS[randNum];
+      const newRitual = {
+        name: data.name,
+        descrip: data.descrip,
+        ingredients: data.ingredients,
+        condition: data.condition,
+        prevValue: randNum
+      };
 
+      this.ritualObj.push(newRitual);
+      this.modifiedRitualArray.splice(randNum, 1);
+    } else if (ritualIndex !== undefined) {
+      //not empty, but not new
+      const randNum = this.randomNumber.getRandomNumber(0, this.modifiedRitualArray.length - 1);
+      const data = this.modifiedRitualArray[randNum];
+      const pos = RITUALS.map(x => x.name).indexOf(this.ritualObj[ritualIndex].name);
+      
+      this.ritualObj[ritualIndex] = {
+        name: data.name,
+        descrip: data.descrip,
+        ingredients: data.ingredients,
+        condition: data.condition,
+        prevValue: randNum,
+      };
+      //remove new value
+      this.modifiedRitualArray.splice(randNum, 1);
+      // //return the value
+      this.modifiedRitualArray.splice(pos, 0, RITUALS[pos]);
+
+    } else {
+      //not empty and new
+      const randNum = this.randomNumber.getRandomNumber(0, this.modifiedRitualArray.length - 1);
+      const data = this.modifiedRitualArray[randNum];
+      const newRitual = {
+        name: data.name,
+        descrip: data.descrip,
+        ingredients: data.ingredients,
+        condition: data.condition,
+        prevValue: randNum,
+      };
+
+      this.ritualObj.push(newRitual);
+      this.modifiedRitualArray.splice(randNum, 1);
+    }
+    this.ritualsEmpty = this.ritualObj.length === 0;
   }
 
   rerollSpecials() {

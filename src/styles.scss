@@ -22,6 +22,10 @@ $index-lines: 1px dotted lighten(blue, 30%);
     --shadow-color: #b3b3b3;
     --toolbar-text-color: #010203;
     --ritual-border-color: var(--toolbar-text-color);
+    --ritual-background-color: #010203e8;
+    --ritual-header-color: #FF3EB5;
+    --ritual-header-background: var(--ritual-border-color);
+    --ritual-detail-color: #FAF9F6;
 }
 
 .excel {
@@ -166,15 +170,29 @@ ul {
     border: 2px solid var(--border-color);
     margin-top: 0.5rem;
     padding: 0 1rem 1rem 0;
+    .title-section {
+        margin-bottom: 0.5rem;
+        .title-descrip {
+            font-size:0.8rem;
+        }
+    }
     .incant-title {
         font-weight: bold;
         color: var(--header-color);
         background-color: var(--border-color);
-        margin-bottom: 0.5rem;
         width: max-content;
     }
     ul {
         padding: 0rem;
+    }
+    &.ritual {
+        border-color: var(--ritual-border-color);
+        background-color: var(--ritual-background-color);
+        color: var(--ritual-detail-color);
+        .incant-title {
+            color: var(--ritual-header-color);
+            background-color: var(--ritual-header-background);
+        }
     }
 }
 

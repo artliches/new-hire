@@ -39,7 +39,10 @@
         </ul>
         @if (incantObj && incantObj.length > 0) {
             <div class="incant-layout">
-                <div class="incant-title">Incantations</div>
+                <div class="title-section">
+                    <span class="incant-title">Incantations.</span>
+                    <span class="title-descrip"> you can use <strong> Knowledge + d3</strong> a day. Test <strong>Knowledge DR12</strong> to invoke them, take <strong>d2 damage if failed</strong>. Natural 1 triggers a random <strong>Fuckup</strong>.</span>
+                </div>
                 <ul>
                     @for (incant of incantObj; track $index) {
                         <li>
@@ -50,6 +53,30 @@
                                     <span (click)="rerollIncantations(false, $index)" class="clickable">{{incant.name}}</span>
                                 }
                                 <span [innerHTML]="incant.descrip"></span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+        @if (ritualObj && ritualObj.length > 0) {
+            <div class="incant-layout ritual">
+                <div class="title-section">
+                    <span class="incant-title">Rituals.</span>
+                    <span class="title-descrip"> to perform you'll need <strong> INGREDIENTS</strong>, <em> conditions and, (time)</em>.</span>
+                </div>
+                <ul>
+                    @for (ritual of ritualObj; track $index) {
+                        <li>
+                            <div>
+                                <span (click)="rerollRituals($index)" class="clickable">{{ritual.name}}</span>
+                                <span [innerHTML]="ritual.descrip"></span>
+                                <div>
+                                    <strong>{{ritual.ingredients | uppercase}}</strong>
+                                </div>
+                                <div>
+                                    <em>{{ritual.condition}}</em>
+                                </div>
                             </div>
                         </li>
                     }
