@@ -28,6 +28,7 @@ export class AppComponent {
     'bos',
   ];
 
+  jobArray: Array<any> = [];
   jobObj = {
     name: '',
     extra: [''],
@@ -36,7 +37,7 @@ export class AppComponent {
     first_skill: [''],
     second_skill: [''],
     stats: [{}],
-    prevValue: -1,
+    currValue: -1,
   };
 
   hasIncantOrRitual = {
@@ -47,6 +48,7 @@ export class AppComponent {
   triggerReroll: boolean = false;
 
   ngOnInit(): void {
+    this.jobArray = this.randomNumber.shuffle(JOBS);
     this.getJob();   
   }
 
@@ -60,18 +62,19 @@ export class AppComponent {
   }
 
   getJob() {
-    const randNum = this.getRandomNum(JOBS, this.jobObj);
-    const chosenJob = JOBS[randNum];
+    const isEndOfArray = this.jobArray.length === this.jobObj.currValue + 1;
+    if (isEndOfArray) this.jobArray = this.randomNumber.shuffle(JOBS);
 
+    const newValue = isEndOfArray ? 0 : this.jobObj.currValue + 1;
     this.jobObj = {
-      name: chosenJob.name,
-      extra: chosenJob.extra,
-      descrip: chosenJob.descrip,
-      skill_descrips: chosenJob.skill_descrips,
-      first_skill: chosenJob.first_skill,
-      second_skill: chosenJob.second_skill,
-      stats: chosenJob?.stats,
-      prevValue: randNum
+      name: this.jobArray[newValue].name,
+      extra: this.jobArray[newValue].extra,
+      descrip: this.jobArray[newValue].descrip,
+      skill_descrips: this.jobArray[newValue].skill_descrips,
+      first_skill: this.jobArray[newValue].first_skill,
+      second_skill: this.jobArray[newValue].second_skill,
+      stats: this.jobArray[newValue].stats,
+      currValue: newValue
     };
   }
 

@@ -15,6 +15,7 @@ export class JobComponent implements OnInit, OnChanges {
   @Input() job: any;
   @Output() getNewJob: EventEmitter<boolean> = new EventEmitter();
   @Output() emitIncantOrRitual: EventEmitter<any> = new EventEmitter();
+
   getExtraStartSkill: boolean = false;
   extraIgnore: number = -1;
   showAllSkills: boolean = false;
@@ -47,7 +48,7 @@ export class JobComponent implements OnInit, OnChanges {
     this.rerollAllSkills();
   }
 
-  rerollSkills(getExtraStartSkill: boolean) {
+  rerollSkills(getExtraStartSkill: boolean) {    
     this.rerollFirstSkill(getExtraStartSkill);
     if (getExtraStartSkill) {
       this.rerollExtraSkill();
@@ -60,6 +61,7 @@ export class JobComponent implements OnInit, OnChanges {
 
   rerollAllSkills() {
     this.showAllSkills = this.job.name === 'salesperson' || this.job.name === 'controller';
+
     this.rerollFirstSkill(this.getExtraStartSkill);
     if (this.getExtraStartSkill) {
       this.rerollExtraSkill();
