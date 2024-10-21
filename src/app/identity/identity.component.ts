@@ -17,42 +17,55 @@ export class IdentityComponent implements OnInit, OnChanges {
 
   @Input() reroll: boolean = false;
 
+  nameArray: Array<any> = [];
   nameObj = {
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
+  pastArray: Array<any> = [];
   pastObj = {
     descrip: '',
-    prevValue: -1
+    currValue: -1
   };
 
+  issueArray: Array<any> = [];
   issueObj = {
     descrip: '',
-    prevValue: -1
+    currValue: -1
   };
 
+  reasonArray: Array<any> = [];
   reasonObj = {
     descrip: '',
-    prevValue: -1
+    currValue: -1
   };
 
+  stressArray: Array<any> = [];
   stressObj = {
     descrip: '',
-    prevValue: -1
+    currValue: -1
   };
 
+  yearnArray: Array<any> = [];
   yearnObj = {
     descrip: '',
-    prevValue: -1
+    currValue: -1
   };
 
   ngOnInit(): void {
+    this.nameArray = this.randomNumber.shuffle(NAMES);
+    this.pastArray = this.randomNumber.shuffle(PAST);
+    this.issueArray = this.randomNumber.shuffle(ISSUES);
+    this.reasonArray = this.randomNumber.shuffle(REASON);
+    this.stressArray = this.randomNumber.shuffle(STRESS);
+    this.yearnArray = this.randomNumber.shuffle(YEARNING);
+    
     this.rerollAll();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      this.rerollAll();
+      if (!changes['reroll'].isFirstChange()) this.rerollAll();
   }
 
   rerollAll() {
@@ -65,47 +78,50 @@ export class IdentityComponent implements OnInit, OnChanges {
   }
 
   rerollName() {
-    const randNum = this.getRandomNum(NAMES, this.nameObj);
+    const newValue = this.nameArray.length === this.nameObj.currValue + 1 ? 0 : this.nameObj.currValue + 1;
     this.nameObj = {
-      descrip: NAMES[randNum],
-      prevValue: randNum
+      descrip: this.nameArray[newValue],
+      currValue: newValue
     };
   }
 
   rerollPast() {
-    const randNum = this.getRandomNum(PAST, this.pastObj);
-    this.pastObj.descrip = PAST[randNum];
-    this.pastObj.prevValue = randNum;
+    const newValue = this.pastArray.length === this.pastObj.currValue + 1 ? 0 : this.pastObj.currValue + 1;
+    this.pastObj = {
+      descrip: this.pastArray[newValue],
+      currValue: newValue
+    };
   }
 
   rerollIssue() {
-    const randNum = this.getRandomNum(ISSUES, this.issueObj);
+    const newValue = this.issueArray.length === this.issueObj.currValue + 1 ? 0 : this.issueObj.currValue + 1;
     this.issueObj = {
-      descrip: ISSUES[randNum],
-      prevValue: randNum
+      descrip: this.issueArray[newValue],
+      currValue: newValue
     };
   }
 
   rerollReason() {
-    const randNum = this.getRandomNum(REASON, this.reasonObj);
-    this.reasonObj.descrip = REASON[randNum];
-    this.reasonObj.prevValue = randNum;
+    const newValue = this.reasonArray.length === this.reasonObj.currValue + 1 ? 0 : this.reasonObj.currValue + 1;
+    this.reasonObj = {
+      descrip: this.reasonArray[newValue],
+      currValue: newValue
+    };
   }
 
   rerollStress() {
-    const randNum = this.getRandomNum(STRESS, this.stressObj);
-    this.stressObj.descrip = STRESS[randNum];
-    this.stressObj.prevValue = randNum;
+    const newValue = this.stressArray.length === this.stressObj.currValue + 1 ? 0 : this.stressObj.currValue + 1;
+    this.stressObj = {
+      descrip: this.stressArray[newValue],
+      currValue: newValue
+    };
   }
 
   rerollYearning() {
-    const randNum = this.getRandomNum(YEARNING, this.yearnObj);
-    this.yearnObj.descrip = YEARNING[randNum];
-    this.yearnObj.prevValue = randNum;
+    const newValue = this.yearnArray.length === this.yearnObj.currValue + 1 ? 0 : this.yearnObj.currValue + 1;
+    this.yearnObj = {
+      descrip: this.yearnArray[newValue],
+      currValue: newValue
+    };
   }
-
-  private getRandomNum(array: Array<any>, infoObj: {descrip: string, prevValue: number}) {
-    return this.randomNumber.getRandomNumber(0, array.length - 1, infoObj.prevValue);
-  }
-
 }
