@@ -24,6 +24,8 @@ export class AppComponent {
   themeArray: Array<string> = [
     'excel',
     'mork',
+    'blackout',
+    'bos',
   ];
 
   jobObj = {

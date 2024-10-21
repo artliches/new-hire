@@ -16,6 +16,9 @@ $lighter-lines: lighten($excel-border, 20%);
 $index-lines: 1px dotted lighten(blue, 30%);
 
 :root {
+    --hover-color: #010203;
+    --clickable-background: #010203;
+    --clickable-color: #FFE900;
     --border-color: #009900;
     --header-color: #FAF9F6;
     --excel-sheet-color: #e8e3d5;
@@ -45,11 +48,18 @@ $index-lines: 1px dotted lighten(blue, 30%);
 }
 
 .blackout {
+    --clickable-color: #FAF9F6;
     --border-color: #010203;
     --header-color: #FAF9F6;
     --excel-sheet-color: var(--border-color);
     --shadow-color: grey;
     --toolbar-text-color: white;
+}
+
+.bos {
+    --border-color: #0000FF;
+    --clickable-background: var(--border-color);
+    --clickable-color: #FAF9F6;
 }
 
 ::selection {
@@ -159,7 +169,7 @@ ul {
         transition: all .05s ease-in-out !important;
         transform: scale(1.1) rotate(2deg) !important;
         background-color: $pink !important;
-        color: $black !important;
+        color: var(--hover-background) !important;
     }
     &:active {
         transform: scale(1) !important;
@@ -305,9 +315,9 @@ ul {
             }
             .card-title {
                 font-size: 1.2rem;
-                background-color: $black;
+                background-color: var(--clickable-background);
                 padding: $small-space 0;
-                color: $yellow;
+                color: var(--clickable-color);
                 place-self: center;
                 transform: rotate(-1deg);
             }
@@ -320,12 +330,12 @@ ul {
                 .skill-group {
                     .non-clickable {
                         background-color: black;
-                        color: $yellow;
+                        color: var(--clickable-color);
                     }
                 }
                 .clickable {
-                    background-color: black;
-                    color: $yellow;
+                    background-color: var(--clickable-background);
+                    color: var(--clickable-color);
                     font-family: "Alegreya";
                     padding: 1px 0;
                 }
@@ -341,7 +351,7 @@ ul {
                 }
                 .info-row {
                     .clickable {
-                        background-color: $black;
+                        background-color: var(--clickable-background);
                         color: $off-white;
                     }
                     display: flex;
