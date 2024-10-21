@@ -136,7 +136,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
     if (this.job.name === 'designer') {
       this.incantObj = [];
       this.rerollIncantations(false);
-    }
+    } else if (this.job.name !== 'supplier') this.ritualObj = [];
     this.rerollWeapon(this.job.name === 'designer');
     this.rerollArmor(this.job.name === 'designer');
     this.rerollBags();

@@ -7,7 +7,7 @@
     <em>a <span class="strike">sacrafice</span> corporat generator for CORP <span class="danger-font">BORG</span></em>
   </header>
   <div class="toolbar">
-      <div class="clickable">
+      <div (click)="rerollAll()" class="clickable">
         <strong>N</strong>ew Hire
       </div>
       <div class="clickable">
@@ -20,7 +20,7 @@
   <section class="corp-body">
     <div class="body-layout">
       <app-resume [job]="jobObj" class="resume"></app-resume>
-      <app-identity [job]="jobObj"></app-identity>
+      <app-identity [reroll]="triggerReroll"></app-identity>
       <app-job
         (emitIncantOrRitual)="getIncantOrRitual($event)"
         (getNewJob)="getJob()"

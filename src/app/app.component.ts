@@ -42,8 +42,15 @@ export class AppComponent {
     other: ''
   };
 
+  triggerReroll: boolean = false;
+
   ngOnInit(): void {
     this.getJob();   
+  }
+
+  rerollAll() {
+    this.getJob();
+    this.triggerReroll = !this.triggerReroll;
   }
 
   getJob() {

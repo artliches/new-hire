@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { RandomNumberService } from '../services/random-number.service';
 import { ISSUES, NAMES, PAST, REASON, STRESS, YEARNING } from '../assets/new_hires.contants';
 import { CommonModule } from '@angular/common';
@@ -10,16 +10,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './identity.component.html',
   styleUrl: './identity.component.scss'
 })
-export class IdentityComponent implements OnInit {
+export class IdentityComponent implements OnInit, OnChanges {
   constructor(
     private randomNumber: RandomNumberService,
   ) {}
 
-  @Input() job = {
-    name: '',
-    descrip: '',
-    prevValue: -1,
-  };
+  @Input() reroll: boolean = false;
 
   nameObj = {
     descrip: '',
@@ -53,6 +49,10 @@ export class IdentityComponent implements OnInit {
 
   ngOnInit(): void {
     this.rerollAll();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      this.rerollAll();
   }
 
   rerollAll() {
