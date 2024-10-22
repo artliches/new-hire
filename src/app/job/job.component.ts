@@ -19,105 +19,188 @@ export class JobComponent implements OnInit, OnChanges {
   getExtraStartSkill: boolean = false;
   extraIgnore: number = -1;
   showAllSkills: boolean = false;
+
+  firstSkillArray: Array<any> = [];
   firstSkillObj = {
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
+  secondSkillArray: Array<any> = [];
   secondSkillObj = {
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
+  extraSkillArray: Array<any> = [];
   extraSkillObj = {
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
+  refArray: Array<any> = [];
+
   ngOnInit(): void {
-    // this.isHelpDesker = this.job.name === 'helpdesker';
-    // this.rerollAllSkills();
+    this.showAllSkills = this.job.name === 'salesperson' || this.job.name === 'controller';
+    this.getExtraStartSkill = this.job.name === 'helpdesker' || this.job.name === 'supplier';
+    if (this.getExtraStartSkill) {
+      this.extraSkillArray = this.randomNumber.shuffle(this.job.first_skill);
+      this.initalExtraSkills();
+    } else {
+      this.firstSkillArray = this.randomNumber.shuffle(this.job.first_skill);
+      this.newSkill();
+    }
+    
+    if (!this.showAllSkills) {
+      this.secondSkillArray = this.randomNumber.shuffle(this.job.second_skill);
+      this.newSecondSkill();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.extraSkillObj = {
-      descrip: '',
-      prevValue: -1
-    };
-    this.getExtraStartSkill = this.job.name === 'helpdesker' || this.job.name === 'supplier';
-    this.rerollAllSkills();
+    if (!changes['job'].isFirstChange()) {
+      this.extraSkillObj = {
+        descrip: '',
+        currValue: -1
+      };
+
+      this.firstSkillObj = {
+        descrip: '',
+        currValue: -1,
+      };
+
+      this.secondSkillObj = {
+        descrip: '',
+        currValue: -1,
+      };
+
+      this.showAllSkills = this.job.name === 'salesperson' || this.job.name === 'controller';
+      this.getExtraStartSkill = this.job.name === 'helpdesker' || this.job.name === 'supplier';
+      if (this.getExtraStartSkill) {
+        this.extraSkillArray = this.randomNumber.shuffle(this.job.first_skill);
+        this.initalExtraSkills();
+      } else {
+        this.firstSkillArray = this.randomNumber.shuffle(this.job.first_skill);
+        this.newSkill();
+
+      this.emitIncantOrRitual.emit(
+        {
+          first: this.firstSkillObj.descrip,
+          other: this.extraSkillObj.descrip
+        }
+      );
+      }
+      if (!this.showAllSkills) {
+        this.secondSkillArray = this.randomNumber.shuffle(this.job.second_skill);
+        this.newSecondSkill();
+      }
+    }
   }
 
-  rerollSkills(getExtraStartSkill: boolean) {    
-    this.rerollFirstSkill(getExtraStartSkill);
-    if (getExtraStartSkill) {
-      this.rerollExtraSkill();
+  initalExtraSkills() {
+      //get both shuffled arrays
+      //give the first entry to first
+      this.firstSkillObj = {
+        descrip: this.extraSkillArray[0],
+        currValue: 0,
+      };
+      //give second entry to extra
+      this.extraSkillObj = {
+        descrip: this.extraSkillArray[1],
+        currValue: 1,
+      }
+
+      this.emitIncantOrRitual.emit(
+        {
+          first: this.firstSkillObj.descrip,
+          other: this.extraSkillObj.descrip
+        }
+      );
+  }
+
+  rerollFirstSkills() {
+    if (this.getExtraStartSkill) {
+      this.rerollFirstExtraSkill(true);
+      this.rerollFirstExtraSkill(false);
+    } else {
+      this.newSkill();
     }
+  }
+
+  rerollFirstExtraSkill(isFirst: boolean) {
+    //we're using the same array, easier to track this way
+    let posToChange = this.extraSkillArray.indexOf(
+      isFirst ? this.firstSkillObj.descrip : this.extraSkillObj.descrip
+    );
+    const posTosSkip = this.extraSkillArray.indexOf(
+      isFirst ? this.extraSkillObj.descrip : this.firstSkillObj.descrip
+    );
+
+    //now we need to get the next entry that isn't already in use
+    do {
+      posToChange += 1
+    } while (
+      this.extraSkillArray[posToChange] === this.extraSkillArray[posTosSkip]
+    );
+
+    // check for end of array
+    if (posToChange === this.extraSkillArray.length) {
+      posToChange = posTosSkip === 0 ? 1 : 0;
+      //reshuffle the array
+      this.extraSkillArray = this.randomNumber.shuffle(this.extraSkillArray);
+    }
+    if (isFirst) {
+      this.firstSkillObj = {
+        descrip: this.extraSkillArray[posToChange],
+        currValue: posToChange
+      }
+    } else {
+      this.extraSkillObj = {
+        descrip: this.extraSkillArray[posToChange],
+        currValue: posToChange
+      }
+    }
+    this.emitIncantOrRitual.emit(
+      {
+        first: this.firstSkillObj.descrip,
+        other: this.extraSkillObj.descrip
+      }
+    );
+  }
+
+  newSkill() {
+    if (this.job.first_skill.length === 1) {
+      this.firstSkillObj = {
+        descrip: this.job.first_skill[0],
+        currValue: 0,
+      };
+    } else {
+      const isEndOfArray = this.firstSkillArray.length === this.firstSkillObj.currValue  + 1;
+      if (isEndOfArray) {
+        this.firstSkillArray = this.randomNumber.shuffle(this.firstSkillArray);
+      }
+  
+      const newValue = isEndOfArray ? 0 : this.firstSkillObj.currValue + 1;
+      this.firstSkillObj = {
+        descrip: this.firstSkillArray[newValue],
+        currValue: newValue
+      };
+    }
+  }
+
+  newSecondSkill() {
+    const isEndOfArray = this.secondSkillArray.length === this.secondSkillObj.currValue + 1;
+    if (isEndOfArray) {
+      this.secondSkillArray = this.randomNumber.shuffle(this.secondSkillArray);
+    }
+    const newValue = isEndOfArray ? 0 : this.secondSkillObj.currValue + 1;
+    this.secondSkillObj = {
+      descrip: this.secondSkillArray[newValue],
+      currValue: newValue
+    };
   }
 
   rerollJob() {
     this.getNewJob.emit(true);
   }
-
-  rerollAllSkills() {
-    this.showAllSkills = this.job.name === 'salesperson' || this.job.name === 'controller';
-
-    this.rerollFirstSkill(this.getExtraStartSkill);
-    if (this.getExtraStartSkill) {
-      this.rerollExtraSkill();
-    }
-    if (!this.showAllSkills) {
-      this.rerollSecondSkill();
-    } 
-  }
-
-  rerollFirstSkill(getExtraStartSkill?: boolean) {
-    if (getExtraStartSkill) {
-      this.firstSkillObj = this.getSkills(this.job.first_skill, this.firstSkillObj, this.extraSkillObj.prevValue);
-    } else {
-      this.firstSkillObj = this.getSkills(this.job.first_skill, this.firstSkillObj);
-    }
-    this.emitIncantOrRitual.emit(
-      {
-        first: this.firstSkillObj.descrip,
-        other: this.extraSkillObj.descrip
-      }
-    );
-  }
-
-  rerollExtraSkill() {
-    this.extraSkillObj = this.getSkills(this.job.first_skill, this.extraSkillObj, this.firstSkillObj.prevValue);
-    // this.checkForIncantsAndRituals(this.extraSkillObj.descrip);
-    this.emitIncantOrRitual.emit(
-      {
-        first: this.firstSkillObj.descrip,
-        other: this.extraSkillObj.descrip
-      }
-    );
-  }
-
-  rerollSecondSkill() {
-    this.secondSkillObj = this.getSkills(this.job.second_skill, this.secondSkillObj);
-  }
-
-  getSkills(skillArray: Array<string>, infoObj: any, extraIgnore?: number) {
-    let randNum;
-    let chosenSkill;
-    if (skillArray.length > 1) {
-      randNum = this.getRandomNum(skillArray, infoObj, extraIgnore);
-      chosenSkill = skillArray[randNum];
-    } else {
-      randNum = -1;
-      chosenSkill = skillArray[0];
-    }
-    return infoObj = {
-      descrip: chosenSkill,
-      prevValue: randNum
-    };
-  }
-
-  private getRandomNum(array: Array<any>, infoObj: {descrip: string, prevValue: number}, extraIgnore?: number) {
-    return this.randomNumber.getRandomNumber(0, array.length - 1, infoObj.prevValue, extraIgnore);
-  }
-
 }

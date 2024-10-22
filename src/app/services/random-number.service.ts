@@ -28,7 +28,7 @@ export class RandomNumberService {
       return sum;
     }
 
-    shuffle(array: Array<any>) {
+    shuffle(array: Array<any>): Array<any> {
       let i = array.length,
       j = 0,
       temp;

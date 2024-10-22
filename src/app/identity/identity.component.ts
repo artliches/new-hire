@@ -80,7 +80,7 @@ export class IdentityComponent implements OnInit, OnChanges {
   rerollName() {
     const isEndOfArray = this.nameArray.length === this.nameObj.currValue + 1;
     if (isEndOfArray) {
-      this.pastArray = this.randomNumber.shuffle(NAMES);
+      this.nameArray = this.randomNumber.shuffle(this.nameArray);
     }
     const newValue = isEndOfArray ? 0 : this.nameObj.currValue + 1;
     this.nameObj = {
@@ -92,7 +92,7 @@ export class IdentityComponent implements OnInit, OnChanges {
   rerollPast() {
     const isEndOfArray = this.pastArray.length === this.pastObj.currValue + 1
     if (isEndOfArray) {
-      this.pastArray = this.randomNumber.shuffle(PAST);
+      this.pastArray = this.randomNumber.shuffle(this.pastArray);
     }
     const newValue = isEndOfArray ? 0 : this.pastObj.currValue + 1;
     this.pastObj = {
@@ -104,7 +104,7 @@ export class IdentityComponent implements OnInit, OnChanges {
   rerollIssue() {
     const isEndOfArray = this.issueArray.length === this.issueObj.currValue + 1;
     if (isEndOfArray) {
-      this.issueArray = this.randomNumber.shuffle(ISSUES);
+      this.issueArray = this.randomNumber.shuffle(this.issueArray);
     }
     const newValue = isEndOfArray ? 0 : this.issueObj.currValue + 1;
     this.issueObj = {
@@ -116,7 +116,7 @@ export class IdentityComponent implements OnInit, OnChanges {
   rerollReason() {
     const isEndOfArray = this.reasonArray.length === this.reasonObj.currValue + 1;
     if (isEndOfArray) {
-      this.reasonArray = this.randomNumber.shuffle(REASON);
+      this.reasonArray = this.randomNumber.shuffle(this.reasonArray);
     }
     const newValue = isEndOfArray ? 0 : this.reasonObj.currValue + 1;
     this.reasonObj = {
@@ -128,7 +128,7 @@ export class IdentityComponent implements OnInit, OnChanges {
   rerollStress() {
     const isEndOfArray = this.stressArray.length === this.stressObj.currValue + 1;
     if (isEndOfArray) {
-      this.stressArray = this.randomNumber.shuffle(STRESS);
+      this.stressArray = this.randomNumber.shuffle(this.stressArray);
     }
     const newValue = isEndOfArray ? 0 : this.stressObj.currValue + 1;
     this.stressObj = {
@@ -140,7 +140,7 @@ export class IdentityComponent implements OnInit, OnChanges {
   rerollYearning() {
     const isEndOfArray = this.yearnArray.length === this.yearnObj.currValue + 1;
     if (isEndOfArray) {
-      this.yearnArray = this.randomNumber.shuffle(YEARNING);
+      this.yearnArray = this.randomNumber.shuffle(this.yearnArray);
     }
     const newValue = isEndOfArray ? 0 : this.yearnObj.currValue + 1;
     this.yearnObj = {

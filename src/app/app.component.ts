@@ -63,7 +63,7 @@ export class AppComponent {
 
   getJob() {
     const isEndOfArray = this.jobArray.length === this.jobObj.currValue + 1;
-    if (isEndOfArray) this.jobArray = this.randomNumber.shuffle(JOBS);
+    if (isEndOfArray) this.jobArray = this.randomNumber.shuffle(this.jobArray);
 
     const newValue = isEndOfArray ? 0 : this.jobObj.currValue + 1;
     this.jobObj = {

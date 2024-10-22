@@ -16,6 +16,7 @@ $lighter-lines: lighten($excel-border, 20%);
 $index-lines: 1px dotted lighten(blue, 30%);
 
 :root {
+    --selection-color: black;
     --print-font-size: 0.75rem;
     --hover-color: #010203;
     --clickable-background: #010203;
@@ -49,6 +50,7 @@ $index-lines: 1px dotted lighten(blue, 30%);
 }
 
 .blackout {
+    --selection-color: white;
     --clickable-color: #FAF9F6;
     --border-color: #010203;
     --header-color: #FAF9F6;
@@ -58,6 +60,7 @@ $index-lines: 1px dotted lighten(blue, 30%);
 }
 
 .bos {
+    --selection-color: white;
     --border-color: #0000FF;
     --clickable-background: var(--border-color);
     --clickable-color: #FAF9F6;
@@ -65,6 +68,7 @@ $index-lines: 1px dotted lighten(blue, 30%);
 
 ::selection {
     background: var(--border-color);
+    color: var(--selection-color);
 }
 
 @mixin flex-column($gap: 0rem) {
