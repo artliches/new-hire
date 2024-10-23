@@ -137,7 +137,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
 
   rerollAll() {
     this.modifiedIncantArray = this.randomNumber.shuffle(JSON.parse(JSON.stringify(INCANTATIONS)));
-    this.modifiedRitualArray = JSON.parse(JSON.stringify(RITUALS));
+    this.modifiedRitualArray = this.randomNumber.shuffle(JSON.parse(JSON.stringify(RITUALS)));
     if (this.job.name === 'supplier') {
       // check if there's a special incant and remove it.
       // this keeps the extra incants if the supplier pulled them
@@ -147,6 +147,11 @@ export class EquipmentComponent implements OnInit, OnChanges {
     }
     if (this.job.name === 'designer') {
       this.incantObj = [];
+      this.armorObj = {
+        name: '',
+        descrip: '',
+        currValue: -1,
+      }; 
       this.rerollIncantations(false);
     } else if (this.job.name !== 'supplier') this.ritualObj = [];
     this.rerollWeapon(this.job.name === 'designer');
@@ -189,8 +194,6 @@ export class EquipmentComponent implements OnInit, OnChanges {
   rerollIncantations(isSpecial: boolean, incantIndex?: number,) {  
     if (this.incantsEmpty) {
       // this is empty
-      // const randNum = this.randomNumber.getRandomNumber(0, INCANTATIONS.length - 1);
-      // const data = INCANTATIONS[randNum];
       const newIncant = {
         name: this.modifiedIncantArray[0].name,
         descrip: this.modifiedIncantArray[0].descrip,
@@ -198,8 +201,6 @@ export class EquipmentComponent implements OnInit, OnChanges {
         isSpecial: isSpecial
       };
       this.incantObj.push(newIncant);
-      // this.modifiedIncantArray.splice(0, 1);
-
     } else if (incantIndex  !== undefined) {
       // not empty, but not new
       // we need to get the next pos that isn't in use
@@ -259,50 +260,61 @@ export class EquipmentComponent implements OnInit, OnChanges {
 
   rerollRituals(ritualIndex?: number) {
     if (this.ritualsEmpty) {
-      const randNum = this.randomNumber.getRandomNumber(0, RITUALS.length - 1);
-      const data = RITUALS[randNum];
       const newRitual = {
-        name: data.name,
-        descrip: data.descrip,
-        ingredients: data.ingredients,
-        condition: data.condition,
-        prevValue: randNum
+        name: this.modifiedRitualArray[0].name,
+        descrip: this.modifiedRitualArray[0].descrip,
+        ingredients: this.modifiedRitualArray[0].ingredients,
+        condition: this.modifiedRitualArray[0].condition,
+        prevValue: 0
       };
 
       this.ritualObj.push(newRitual);
-      this.modifiedRitualArray.splice(randNum, 1);
     } else if (ritualIndex !== undefined) {
       //not empty, but not new
-      const randNum = this.randomNumber.getRandomNumber(0, this.modifiedRitualArray.length - 1);
-      const data = this.modifiedRitualArray[randNum];
-      const pos = RITUALS.map(x => x.name).indexOf(this.ritualObj[ritualIndex].name);
-      
-      this.ritualObj[ritualIndex] = {
-        name: data.name,
-        descrip: data.descrip,
-        ingredients: data.ingredients,
-        condition: data.condition,
-        prevValue: randNum,
-      };
-      //remove new value
-      this.modifiedRitualArray.splice(randNum, 1);
-      // //return the value
-      this.modifiedRitualArray.splice(pos, 0, RITUALS[pos]);
+      // we need to get the next pos that isn't in use
+      const posToSkip: Array<number> = [];
+      this.ritualObj.forEach((x: { prevValue: number; }) => posToSkip.push(x.prevValue));
 
+      let newPos = this.ritualObj[ritualIndex].prevValue;
+      do {
+        newPos += 1
+        if (newPos === this.modifiedRitualArray.length) {
+          //if the newPos is past the end of the array, go the front
+          newPos = 0;
+        }
+      } while (posToSkip.includes(newPos));
+
+      //we've got a position that works, assign it to current index
+      this.ritualObj[ritualIndex] = {
+        name: this.modifiedRitualArray[newPos].name,
+        descrip: this.modifiedRitualArray[newPos].descrip,
+        ingredients: this.modifiedRitualArray[newPos].ingredients,
+        condition: this.modifiedRitualArray[newPos].condition,
+        prevValue: newPos,
+      };
     } else {
       //not empty and new
-      const randNum = this.randomNumber.getRandomNumber(0, this.modifiedRitualArray.length - 1);
-      const data = this.modifiedRitualArray[randNum];
+      const posToSkip: Array<number> = [];
+      this.ritualObj.forEach((x: { prevValue: number; }) => posToSkip.push(x.prevValue));
+
+      let newPos = -1;
+      do {
+        newPos += 1
+        if (newPos === this.modifiedRitualArray.length) {
+          //if the newPos is past the end of the array, go the front
+          newPos = 0;
+        }
+      } while (posToSkip.includes(newPos));
+
       const newRitual = {
-        name: data.name,
-        descrip: data.descrip,
-        ingredients: data.ingredients,
-        condition: data.condition,
-        prevValue: randNum,
+        name: this.modifiedRitualArray[newPos].name,
+        descrip: this.modifiedRitualArray[newPos].descrip,
+        ingredients: this.modifiedRitualArray[newPos].ingredients,
+        condition: this.modifiedRitualArray[newPos].condition,
+        prevValue: newPos,
       };
 
       this.ritualObj.push(newRitual);
-      this.modifiedRitualArray.splice(randNum, 1);
     }
     this.ritualsEmpty = this.ritualObj.length === 0;
   }
@@ -343,24 +355,25 @@ export class EquipmentComponent implements OnInit, OnChanges {
   rerollArmor(isDesigner?: boolean) {
     let isEndOfArray: boolean = false;
     if (isDesigner) {
-      this.armorArray = SUITS;
-      isEndOfArray = 2 === this.armorObj.currValue + 1;
+      this.armorArray = JSON.parse(JSON.stringify(SUITS));
+      isEndOfArray = 2 <= this.armorObj.currValue + 1;
+      const newValue = isEndOfArray ? 0 : this.armorObj.currValue + 1;
+      this.armorObj = {
+        name: this.armorArray[newValue].name,
+        descrip: this.armorArray[newValue].descrip,
+        currValue: newValue,
+      };
     } else {
       isEndOfArray = this.armorArray.length === this.armorObj.currValue + 1;
+
+      if (isEndOfArray && !isDesigner) this.armorArray = this.randomNumber.shuffle(this.armorArray);
+
+      const newValue = isEndOfArray ? 0 : this.armorObj.currValue + 1;
+      this.armorObj = {
+        name: this.armorArray[newValue].name,
+        descrip: this.armorArray[newValue].descrip,
+        currValue: newValue,
+      };
     }
-
-    if (isEndOfArray && !isDesigner) this.armorArray = this.randomNumber.shuffle(this.armorArray);
-
-    const newValue = isEndOfArray ? 0 : this.armorObj.currValue + 1;
-    this.armorObj = {
-      name: this.armorArray[newValue].name,
-      descrip: this.armorArray[newValue].descrip,
-      currValue: newValue,
-    };
-
-  }
-
-  private getRandomNum(arrayLength: number, prevValue: number) {
-    return this.randomNumber.getRandomNumber(0, arrayLength - 1, prevValue);
   }
 }
