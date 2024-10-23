@@ -18,32 +18,37 @@ export class EquipmentComponent implements OnInit, OnChanges {
   @Input() job: any;
   @Input() getIncantOrRitual: {first: string, other: string} = {first: '', other: ''};
 
+  armorArray: Array<any> = [];
   armorObj = {
     name: '',
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
+  bagsArray: Array<any> = [];
   bagsObj = {
     name: '',
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
+  essentialsArray: Array<any> = [];
   essentialsObj = {
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
+  specialArray: Array<any> = [];
   specialObj = {
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
+  weaponArray: Array<any> = [];
   weaponObj = {
     name: '',
     descrip: '',
-    prevValue: -1,
+    currValue: -1,
   };
 
   incantObj: any = [];
@@ -55,13 +60,20 @@ export class EquipmentComponent implements OnInit, OnChanges {
   modifiedRitualArray: Array<any> = [];
 
   ngOnInit(): void {
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['job']) {
       if (changes['job'].currentValue !== changes['job'].previousValue || changes['job'].isFirstChange()) {
         this.incantObj = [];
+        this.ritualObj = [];
+
+        this.weaponArray = this.randomNumber.shuffle(OFFICE_TOOLS);
+        // need to preserve the order of SUITS in case it's a designer
+        this.armorArray = this.randomNumber.shuffle(JSON.parse(JSON.stringify(SUITS)));
+        this.bagsArray = this.randomNumber.shuffle(BAGS);
+        this.essentialsArray = this.randomNumber.shuffle(ESSENTIALS);
+        this.specialArray = this.randomNumber.shuffle(SPECIALS);
         this.rerollAll();
       }
     }
@@ -124,7 +136,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
   }
 
   rerollAll() {
-    this.modifiedIncantArray = JSON.parse(JSON.stringify(INCANTATIONS));
+    this.modifiedIncantArray = this.randomNumber.shuffle(JSON.parse(JSON.stringify(INCANTATIONS)));
     this.modifiedRitualArray = JSON.parse(JSON.stringify(RITUALS));
     if (this.job.name === 'supplier') {
       // check if there's a special incant and remove it.
@@ -145,21 +157,25 @@ export class EquipmentComponent implements OnInit, OnChanges {
   }
 
   rerollBags() {
-    const randNum = this.getRandomNum(BAGS.length, this.bagsObj.prevValue);
-    const data = BAGS[randNum];
+    const isEndOfArray = this.bagsArray.length === this.bagsObj.currValue + 1;
+    if (isEndOfArray) this.bagsArray = this.randomNumber.shuffle(this.bagsArray);
+
+    const newValue = isEndOfArray ? 0 : this.bagsObj.currValue + 1;
     this.bagsObj = {
-      name: data.name,
-      descrip: data.descrip,
-      prevValue: randNum,
+      name: this.bagsArray[newValue].name,
+      descrip: this.bagsArray[newValue].descrip,
+      currValue: newValue,
     };
   };
 
   rerollEssentials() {
-    const randNum = this.getRandomNum(ESSENTIALS.length, this.essentialsObj.prevValue);
-    const data = ESSENTIALS[randNum];
+    const isEndOfArray = this.essentialsArray.length === this.essentialsObj.currValue + 1;
+    if (isEndOfArray) this.essentialsArray = this.randomNumber.shuffle(this.essentialsArray);
+
+    const newValue = isEndOfArray ? 0 : this.essentialsObj.currValue + 1;
     this.essentialsObj = {
-      descrip: data,
-      prevValue: randNum,
+      descrip: this.essentialsArray[newValue],
+      currValue: newValue,
     };
   }
 
@@ -173,52 +189,70 @@ export class EquipmentComponent implements OnInit, OnChanges {
   rerollIncantations(isSpecial: boolean, incantIndex?: number,) {  
     if (this.incantsEmpty) {
       // this is empty
-      const randNum = this.randomNumber.getRandomNumber(0, INCANTATIONS.length - 1);
-      const data = INCANTATIONS[randNum];
+      // const randNum = this.randomNumber.getRandomNumber(0, INCANTATIONS.length - 1);
+      // const data = INCANTATIONS[randNum];
       const newIncant = {
-        name: data.name,
-        descrip: data.descrip,
-        prevValue: randNum,
+        name: this.modifiedIncantArray[0].name,
+        descrip: this.modifiedIncantArray[0].descrip,
+        prevValue: 0,
         isSpecial: isSpecial
       };
       this.incantObj.push(newIncant);
-      this.modifiedIncantArray.splice(randNum, 1);
+      // this.modifiedIncantArray.splice(0, 1);
 
     } else if (incantIndex  !== undefined) {
       // not empty, but not new
-      const randNum = this.randomNumber.getRandomNumber(0, this.modifiedIncantArray.length - 1);
-      const data = this.modifiedIncantArray[randNum];
-      const pos = INCANTATIONS.map(x => x.name).indexOf(this.incantObj[incantIndex].name);
-      
+      // we need to get the next pos that isn't in use
+      const posToSkip: Array<number> = [];
+      this.incantObj.forEach((x: { prevValue: number; }) => posToSkip.push(x.prevValue));
+
+      let newPos = this.incantObj[incantIndex].prevValue;
+      do {
+        newPos += 1
+        if (newPos === this.modifiedIncantArray.length) {
+          //if the newPos is past the end of the array, go the front
+          newPos = 0;
+        }
+      } while (posToSkip.includes(newPos));
+
+      //we've got a position that works, assign it to current index
       this.incantObj[incantIndex] = {
-        name: data.name,
-        descrip: data.descrip,
-        prevValue: randNum,
+        name: this.modifiedIncantArray[newPos].name,
+        descrip: this.modifiedIncantArray[newPos].descrip,
+        prevValue: newPos,
         isSpecial: isSpecial
       };
-      //remove new value
-      this.modifiedIncantArray.splice(randNum, 1);
-      // //return the value
-      this.modifiedIncantArray.splice(pos, 0, INCANTATIONS[pos]);
     } else {
       // not empty and new
-      const randNum = this.randomNumber.getRandomNumber(0, this.modifiedIncantArray.length - 1);
-      const data = this.modifiedIncantArray[randNum];
+      //we're making an array of up to size 3.
+      //how do we avoid collisions?
+      //get the locations of the previous incants and shuffle past
+      const posToSkip: Array<number> = [];
+      this.incantObj.forEach((x: { prevValue: number; }) => posToSkip.push(x.prevValue));
+      
+      //now that we have the values to skip, we need to find the next entry that isn't in use
+      let newPos = -1;
+      do {
+        newPos += 1
+        if (newPos === this.modifiedIncantArray.length) {
+          //if the newPos is past the end of the array, go the front
+          newPos = 0;
+        }
+      } while (posToSkip.includes(newPos));
+
+      //we have a newPos that works, add it to the incantObj
       const newIncant = {
-        name: data.name,
-        descrip: data.descrip,
-        prevValue: randNum,
+        name: this.modifiedIncantArray[newPos].name,
+        descrip: this.modifiedIncantArray[newPos].descrip,
+        prevValue: newPos,
         isSpecial: isSpecial
       };
-
       if (isSpecial) {
         // put it in the front
         this.incantObj.unshift(newIncant);
       } else {
         this.incantObj.push(newIncant);
       }
-
-      this.modifiedIncantArray.splice(randNum, 1);
     }
     this.incantsEmpty = this.incantObj.length === 0;
   }
@@ -274,42 +308,56 @@ export class EquipmentComponent implements OnInit, OnChanges {
   }
 
   rerollSpecials() {
-    const randNum = this.getRandomNum(SPECIALS.length, this.specialObj.prevValue);
-    const data = SPECIALS[randNum];
+    const isEndOfArray = this.specialArray.length === this.specialObj.currValue + 1;
+    if (isEndOfArray) this.specialArray = this.randomNumber.shuffle(this.specialArray);
 
-    if (data.includes('incantation')) {
+    const newValue = isEndOfArray ? 0 : this.specialObj.currValue + 1;
+
+    if (this.specialArray[newValue].includes('incantation')) {
       this.specialObj = {
         descrip: '',
-        prevValue: randNum
+        currValue: newValue
       };
       this.rerollIncantations(true);
     }
     else {
       this.specialObj = {
-        descrip: data,
-        prevValue: randNum,
+        descrip: this.specialArray[newValue],
+        currValue: newValue,
       };
     }
   }
 
   rerollWeapon(isDesigner?: boolean) {
-    const randNum = this.getRandomNum(6, this.weaponObj.prevValue);
-    const data = OFFICE_TOOLS[randNum];
+    const isEndOfArray = this.weaponArray.length === this.weaponObj.currValue + 1;
+    if (isEndOfArray) this.weaponArray = this.randomNumber.shuffle(this.weaponArray);
+
+    const newValue = isEndOfArray ? 0 : this.weaponObj.currValue + 1;
     this.weaponObj = {
-      name: data.name,
-      descrip: data.descrip,
-      prevValue: randNum,
+      name: this.weaponArray[newValue].name,
+      descrip: this.weaponArray[newValue].descrip,
+      currValue: newValue,
     };
   }
 
   rerollArmor(isDesigner?: boolean) {
-    const randNum = this.getRandomNum(isDesigner ? 2 : 4, this.armorObj.prevValue);
-    const data = SUITS[randNum];
+    let isEndOfArray: boolean = false;
+    if (isDesigner) {
+      this.armorArray = SUITS;
+      isEndOfArray = 2 === this.armorObj.currValue + 1;
+    } else {
+      isEndOfArray = this.armorArray.length === this.armorObj.currValue + 1;
+    }
+
+    if (isEndOfArray && !isDesigner) this.armorArray = this.randomNumber.shuffle(this.armorArray);
+
+    const newValue = isEndOfArray ? 0 : this.armorObj.currValue + 1;
     this.armorObj = {
-      name: data.name,
-      descrip: data.descrip,
-      prevValue: randNum,
+      name: this.armorArray[newValue].name,
+      descrip: this.armorArray[newValue].descrip,
+      currValue: newValue,
     };
+
   }
 
   private getRandomNum(arrayLength: number, prevValue: number) {
