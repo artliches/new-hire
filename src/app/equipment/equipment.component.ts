@@ -127,7 +127,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
           changes['getIncantOrRitual'].previousValue['first'].includes('Rituals') ||
           changes['getIncantOrRitual'].previousValue['other'].includes('Rituals')
         ) {
-          // remove all incants
+          //reshuffle ritual array and remove all rituals
           this.modifiedRitualArray = JSON.parse(JSON.stringify(RITUALS));
           this.ritualObj = [];
         }
@@ -136,6 +136,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
   }
 
   rerollAll() {
+
     this.modifiedIncantArray = this.randomNumber.shuffle(JSON.parse(JSON.stringify(INCANTATIONS)));
     this.modifiedRitualArray = this.randomNumber.shuffle(JSON.parse(JSON.stringify(RITUALS)));
     if (this.job.name === 'supplier') {
@@ -153,7 +154,10 @@ export class EquipmentComponent implements OnInit, OnChanges {
         currValue: -1,
       }; 
       this.rerollIncantations(false);
-    } else if (this.job.name !== 'supplier') this.ritualObj = [];
+    } else if (this.job.name !== 'supplier') {
+      this.ritualObj = [];
+      this.incantObj = [];
+    } 
     this.rerollWeapon(this.job.name === 'designer');
     this.rerollArmor(this.job.name === 'designer');
     this.rerollBags();
@@ -185,10 +189,28 @@ export class EquipmentComponent implements OnInit, OnChanges {
   }
 
   removeIncantation(index: number, rollSpecials: boolean) {
-    const pos = INCANTATIONS.map(x => x.name).indexOf(this.incantObj[index].name);
-    this.modifiedIncantArray.splice(pos, 0, INCANTATIONS[pos]);
     this.incantObj.splice(index, 1);
     if (rollSpecials) this.rerollSpecials();
+  }
+
+  private seekNewIncantPosition(index?: number): number {
+    const posToSkip: Array<number> = [];
+    this.incantObj.forEach((incant: { name: string; }) => posToSkip.push(this.modifiedIncantArray.findIndex(modIncant => modIncant.name === incant.name)));
+
+    let newPos;
+    if (index !== undefined) {
+      newPos = this.incantObj[index].prevValue;
+    } else {
+      newPos = -1;
+    }
+    do {
+      newPos += 1
+      if (newPos === this.modifiedIncantArray.length) {
+        //if the newPos is past the end of the array, go the front
+        newPos = 0;
+      }
+    } while (posToSkip.includes(newPos));
+    return newPos;
   }
 
   rerollIncantations(isSpecial: boolean, incantIndex?: number,) {  
@@ -204,17 +226,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
     } else if (incantIndex  !== undefined) {
       // not empty, but not new
       // we need to get the next pos that isn't in use
-      const posToSkip: Array<number> = [];
-      this.incantObj.forEach((x: { prevValue: number; }) => posToSkip.push(x.prevValue));
-
-      let newPos = this.incantObj[incantIndex].prevValue;
-      do {
-        newPos += 1
-        if (newPos === this.modifiedIncantArray.length) {
-          //if the newPos is past the end of the array, go the front
-          newPos = 0;
-        }
-      } while (posToSkip.includes(newPos));
+      const newPos = this.seekNewIncantPosition(incantIndex);
 
       //we've got a position that works, assign it to current index
       this.incantObj[incantIndex] = {
@@ -224,22 +236,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
         isSpecial: isSpecial
       };
     } else {
-      // not empty and new
-      //we're making an array of up to size 3.
-      //how do we avoid collisions?
-      //get the locations of the previous incants and shuffle past
-      const posToSkip: Array<number> = [];
-      this.incantObj.forEach((x: { prevValue: number; }) => posToSkip.push(x.prevValue));
-      
-      //now that we have the values to skip, we need to find the next entry that isn't in use
-      let newPos = -1;
-      do {
-        newPos += 1
-        if (newPos === this.modifiedIncantArray.length) {
-          //if the newPos is past the end of the array, go the front
-          newPos = 0;
-        }
-      } while (posToSkip.includes(newPos));
+      const newPos = this.seekNewIncantPosition();
 
       //we have a newPos that works, add it to the incantObj
       const newIncant = {
@@ -258,6 +255,28 @@ export class EquipmentComponent implements OnInit, OnChanges {
     this.incantsEmpty = this.incantObj.length === 0;
   }
 
+  private seekNewRitualPosition(index?: number): number {
+    const posToSkip: Array<number> = [];
+    this.ritualObj.forEach((ritualName: { name: any; }) => posToSkip.push(
+      this.modifiedRitualArray.findIndex(modName => {
+        return modName.name === ritualName.name;
+      })
+    ))
+
+    let newPos = index !== undefined ?
+      this.ritualObj[index].prevValue : -1;
+
+    do {
+      newPos += 1
+      if (newPos === this.modifiedRitualArray.length) {
+        //if the newPos is past the end of the array, go the front
+        newPos = 0;
+      }
+    } while (posToSkip.includes(newPos));
+
+    return newPos;
+  }
+
   rerollRituals(ritualIndex?: number) {
     if (this.ritualsEmpty) {
       const newRitual = {
@@ -272,17 +291,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
     } else if (ritualIndex !== undefined) {
       //not empty, but not new
       // we need to get the next pos that isn't in use
-      const posToSkip: Array<number> = [];
-      this.ritualObj.forEach((x: { prevValue: number; }) => posToSkip.push(x.prevValue));
-
-      let newPos = this.ritualObj[ritualIndex].prevValue;
-      do {
-        newPos += 1
-        if (newPos === this.modifiedRitualArray.length) {
-          //if the newPos is past the end of the array, go the front
-          newPos = 0;
-        }
-      } while (posToSkip.includes(newPos));
+      const newPos = this.seekNewRitualPosition(ritualIndex);
 
       //we've got a position that works, assign it to current index
       this.ritualObj[ritualIndex] = {
@@ -294,17 +303,7 @@ export class EquipmentComponent implements OnInit, OnChanges {
       };
     } else {
       //not empty and new
-      const posToSkip: Array<number> = [];
-      this.ritualObj.forEach((x: { prevValue: number; }) => posToSkip.push(x.prevValue));
-
-      let newPos = -1;
-      do {
-        newPos += 1
-        if (newPos === this.modifiedRitualArray.length) {
-          //if the newPos is past the end of the array, go the front
-          newPos = 0;
-        }
-      } while (posToSkip.includes(newPos));
+      const newPos = this.seekNewRitualPosition();
 
       const newRitual = {
         name: this.modifiedRitualArray[newPos].name,
