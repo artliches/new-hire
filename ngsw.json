@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1729800422255,
+  "timestamp": 1729800531228,
   "index": "/new-hire/index.csr.html",
   "assetGroups": [
     {
@@ -14,10 +14,10 @@
         "/new-hire/favicon.ico",
         "/new-hire/index.csr.html",
         "/new-hire/index.html",
-        "/new-hire/main-SDFXO562.js",
+        "/new-hire/main-4GEHLFNM.js",
         "/new-hire/manifest.webmanifest",
         "/new-hire/polyfills-FFHMD2TL.js",
-        "/new-hire/styles-KPGG3M6I.css"
+        "/new-hire/styles-ORB6TAJN.css"
       ],
       "patterns": []
     },
@@ -33,25 +33,35 @@
         "/new-hire/icons/android-chrome-512x512.png",
         "/new-hire/icons/apple-touch-icon.png",
         "/new-hire/icons/favicon-16x16.png",
-        "/new-hire/icons/favicon-32x32.png"
+        "/new-hire/icons/favicon-32x32.png",
+        "/new-hire/media/Alegreya-JSGAVCRA.ttf",
+        "/new-hire/media/Another_Danger-GUZ3TFPH.ttf",
+        "/new-hire/media/CATS-DS6PZY2Z.ttf",
+        "/new-hire/media/CallingCode-XBE72OYF.ttf",
+        "/new-hire/media/RobotoMono-YL6RY2OQ.ttf"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/new-hire/favicon.ico": "31649838d95a733661865170cf20eab4ef0c52aa",
-    "/new-hire/icons/android-chrome-192x192.png": "a2d4a42b2859def81833e12ffd981e26c75f986f",
-    "/new-hire/icons/android-chrome-512x512.png": "ad9ec28d0440bfa403ecd9a69ab2659b8d020ee8",
-    "/new-hire/icons/apple-touch-icon.png": "2a6631e06169c8699d78a50d09097eef2d4f8a28",
-    "/new-hire/icons/favicon-16x16.png": "596b043a23ec2e2c7489b4ba06aa0fa0b9b94db6",
-    "/new-hire/icons/favicon-32x32.png": "52402d8c3733635b79ed660a20fe07a186704450",
-    "/new-hire/index.csr.html": "d30016902bdd37ace4acba2f7a02856d846e8e42",
-    "/new-hire/index.html": "8e7e6854fbc347937f23700dbe3c895a6c95a0eb",
-    "/new-hire/main-SDFXO562.js": "415a353adf3f3061da3d74836ab8b7ba30185b3e",
-    "/new-hire/manifest.webmanifest": "dc510c18c4126f4fef6aef9abda5d3599063837a",
+    "/new-hire/favicon.ico": "ee7b40d5e25c0bb7088162497d82018559b88f3c",
+    "/new-hire/icons/android-chrome-192x192.png": "49352e958c168a4bf9236b0124b55ed1444712ef",
+    "/new-hire/icons/android-chrome-512x512.png": "4c441347b6ab38c232784fbe03dd43922386c5e2",
+    "/new-hire/icons/apple-touch-icon.png": "24d848bf0ec8e448f9bdd14ddc1c18132c9720b2",
+    "/new-hire/icons/favicon-16x16.png": "f369e77cc88c020d202d31071420d1b2aff13e93",
+    "/new-hire/icons/favicon-32x32.png": "f8567ebe24193a33e4faef952843d89d47ea71d6",
+    "/new-hire/index.csr.html": "a9e5cb1ab593954a0b87f732e3bb113c3cb3020b",
+    "/new-hire/index.html": "408cfea62a3812f5d4cfaf7974aeac1486babbca",
+    "/new-hire/main-4GEHLFNM.js": "1f04385cbf538aae5c69dd6132c7240bc04f0897",
+    "/new-hire/manifest.webmanifest": "dc64f87aea330526680c3c935a0d11aceb01604b",
+    "/new-hire/media/Alegreya-JSGAVCRA.ttf": "6609880948728419617455150aea67982b0319c1",
+    "/new-hire/media/Another_Danger-GUZ3TFPH.ttf": "542acf0258a12a83f4eec5f2acaa872a6c95b766",
+    "/new-hire/media/CATS-DS6PZY2Z.ttf": "86b01de1a3bf84b98da42bbcad7a5b303cfc0f16",
+    "/new-hire/media/CallingCode-XBE72OYF.ttf": "559ac8a987f16dc20342cc599472ed1c2da1d996",
+    "/new-hire/media/RobotoMono-YL6RY2OQ.ttf": "49b4d9fac9359dbe93549548dcf74141e491ad6f",
     "/new-hire/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
-    "/new-hire/styles-KPGG3M6I.css": "b9c2303edf26a47ddf13aba6c895c8a4f04fffe6"
+    "/new-hire/styles-ORB6TAJN.css": "c582bb2769f67cde128666e77b38cf59b5602d79"
   },
   "navigationUrls": [
     {
