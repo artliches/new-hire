@@ -1,8 +1,8 @@
 {
-  "name": "NEW_HIRE.XLS",
-  "short_name": "NEW_HIRE",
-  "theme_color": "#009900",
-  "background_color": "#009900",
+  "name": "FAREWELL TO ARMS",
+  "short_name": "FAREWELL",
+  "theme_color": "#40BFBF",
+  "background_color": "#40BFBF",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
