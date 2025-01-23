@@ -1,0 +1,10 @@
+.social-link {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    &:hover {
+        background-color: white;
+        color: var(--border-color);
+    }
+}
